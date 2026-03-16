@@ -95,18 +95,19 @@
             pointer-events: none;
         }
         
-        /* 标题区域 - 右上 */
+        /* 标题区域 - 顶部居中 */
         .title-area {
             position: absolute;
-            top: 120px;
-            right: 120px;
-            width: 900px;
-            text-align: right;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
             z-index: 10;
         }
         
         .title {
-            font-size: 108px;
+            font-family: 'Courier New', monospace;
+            font-size: 64px;
             font-weight: 900;
             /* 立体金属金字 */
             background: linear-gradient(
@@ -123,17 +124,38 @@
             /* 立体阴影 */
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5))
                     drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
-            letter-spacing: 12px;
-            margin-bottom: 15px;
+            letter-spacing: 8px;
+            margin-bottom: 0;
             text-transform: uppercase;
         }
         
-        .subtitle {
+        /* 中间文字 */
+        .middle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Courier New', monospace;
             font-size: 28px;
-            color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 6px;
-            font-weight: 300;
-            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 4px;
+            font-weight: 400;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        /* 底部文字 */
+        .footer-text {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            text-align: center;
+            z-index: 10;
         }
         
         /* 人物形象 - 左下，带羽化边缘 */
@@ -217,11 +239,16 @@
             <img src="/home/admin/.openclaw/workspace/images/jinyin-character/04-cover-final.png" alt="金银" class="character">
         </div>
         
-        <!-- 标题 -->
+        <!-- 标题 - 顶部居中 -->
         <div class="title-area">
             <div class="title">金银 Planet</div>
-            <div class="subtitle">Wealth & Wisdom</div>
         </div>
+        
+        <!-- 中间文字 -->
+        <div class="middle-text">One Person · AI Army</div>
+        
+        <!-- 底部文字 -->
+        <div class="footer-text">让 AI 给你打工，你只管做老板</div>
         
         <!-- 装饰 -->
         <div class="gold-frame"></div>
