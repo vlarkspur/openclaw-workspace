@@ -41,6 +41,42 @@ Git 最后提交时间是 11:57（手动提交）
 
 ---
 
+## [ERR-20260316-002] 投资监控小弟 - 股东户数抓取失败
+
+**Logged**: 2026-03-16T22:00:00+08:00
+**Priority**: high
+**Status**: pending
+**Area**: 数据抓取
+
+### Summary
+投资监控小弟抓取比亚迪股东户数时，同花顺接口返回空数据
+
+### Error
+```
+Error: 同花顺 F10 接口返回空数据
+URL: http://basic.10jqka.com.cn/002594/shareholder.html
+尝试次数：3
+结果：均为空
+```
+
+### Context
+- 股票：比亚迪 (002594.SZ)
+- 数据字段：股东户数
+- 时间：2026-03-16 22:00
+- 其他股票：正常
+
+### Suggested Fix
+1. 检查同花顺网站是否改版
+2. 切换到备用数据源（AKShare）
+3. 添加数据为空时的告警机制
+
+### Metadata
+- Reproducible: unknown
+- 相关团队：investment-monitor
+- 相关任务：季度股东户数更新
+
+---
+
 ## 条目格式模板
 
 ```markdown

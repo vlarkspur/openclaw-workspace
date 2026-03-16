@@ -38,6 +38,39 @@ medium
 
 ---
 
+## [FEAT-20260316-002] 估值分析需要敏感性分析
+
+**Logged**: 2026-03-16T22:03:00+08:00
+**Priority**: high
+**Status**: pending
+**Area**: 投资分析
+
+### Requested Capability
+估值分析输出需要包含敏感性分析表格：
+- 增长率变化 ±2% 对估值的影响
+- 折现率变化 ±1% 对估值的影响
+- 用表格展示 9 种情景组合
+
+### User Context
+用户是文科背景，需要直观理解估值的不确定性
+单一数字容易误导，需要看到区间和情景
+
+### Complexity Estimate
+medium
+
+### Suggested Implementation
+1. 修改 valuation-analyst SKILL.md
+2. 添加敏感性分析计算逻辑
+3. 输出格式：Markdown 表格
+4. 默认展示 3x3 情景矩阵
+
+### Metadata
+- Frequency: recurring
+- 相关功能：valuation-analyst
+- 相关团队：valuation-analyst, investment-manager-charlie
+
+---
+
 ## 条目格式模板
 
 ```markdown

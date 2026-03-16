@@ -41,6 +41,47 @@
 
 ---
 
+## [LRN-20260316-002] 估值分析不能只给 DCF 结果
+
+**Logged**: 2026-03-16T22:02:00+08:00
+**Priority**: high
+**Status**: pending
+**来源**: 用户纠正
+**Area**: 投资分析
+
+### Summary
+估值分析小弟只给 DCF 计算结果，没有解释假设和不确定性
+
+### Details
+用户问比亚迪的内在价值，估值小弟：
+- 只给出了 DCF 结果：每股 350 元
+- 没有说明关键假设（增长率、折现率）
+- 没有给出敏感性分析
+- 没有说明置信区间
+
+用户纠正："不要只给我一个数字，我要知道你是怎么算的"
+
+### Suggested Action
+- 估值分析必须包含：关键假设、敏感性分析、置信区间
+- 默认输出 3 种情景（乐观/中性/悲观）
+- 标注数据来源和可信度
+
+### Metadata
+- Source: user_feedback
+- Tags: 估值，DCF, 透明度
+- Pattern-Key: valuation.transparency
+- 相关团队：valuation-analyst
+
+### 升级目标
+→ skills/valuation-analyst/SKILL.md
+
+### Resolution
+- **Resolved**: 2026-03-16T22:05:00+08:00
+- **Promoted**: skills/valuation-analyst/SKILL.md
+- **Notes**: 已更新估值输出模板，增加关键假设、敏感性分析、数据来源
+
+---
+
 ## 条目格式模板
 
 ```markdown
