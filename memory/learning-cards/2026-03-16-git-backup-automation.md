@@ -1,100 +1,103 @@
-# Git 备份自动化配置
+# 用 GitHub 备份阿里云服务器上的 OpenClaw 文件
 
 ## 日期
 2026-03-16
 
-## 问题
-- 每天手动备份太麻烦，容易忘记
-- 学习记录应该 AI 团队自动完成，不是用户手动写
+## 我今天想解决什么
+- 备份阿里云服务器上 OpenClaw workspace 的文件
+- 不想手动拷贝，想要自动化
 
-## 解决方案
+## 我学会了什么
 
-### 1. Git 自动备份（cron 定时任务）
+### 1. Git 是啥（大白话理解）
+- **普通备份**：像 U 盘拷贝，不知道改了啥
+- **Git 备份**：带时间轴的超级备份，每次都有备注
 
-**添加 cron 任务：**
+### 2. SSH 密钥配置（连到 GitHub）
+
+**生成密钥：**
+```bash
+ssh-keygen -t ed25519 -C "邮箱"
+```
+→ 全程回车就行
+
+**查看公钥：**
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+→ 复制整行输出
+
+**添加到 GitHub：**
+1. 打开 https://github.com/settings/keys
+2. 点 "New SSH key"
+3. 粘贴公钥
+
+**测试连接：**
+```bash
+ssh -T git@github.com
+```
+→ 看到 `Hi vlarkspur!` 就成功了
+
+### 3. Git 仓库配置
+
+**关联远程仓库：**
+```bash
+cd /home/admin/.openclaw/workspace
+git remote add origin git@github.com:vlarkspur/openclaw-workspace.git
+```
+
+**首次推送：**
+```bash
+git config --global user.name "vlarkspur"
+git config --global user.email "6355134@qq.com"
+git add .
+git commit -m "首次备份"
+git push -u origin master
+```
+
+### 4. 自动化备份（cron 定时任务）
+
+**添加每天自动备份：**
 ```bash
 crontab -e
 # 添加这一行：
-0 17 * * * cd /home/admin/.openclaw/workspace && git add . && git commit -m "自动备份 - 金银" && git push --quiet
+0 17 * * * cd /home/admin/.openclaw/workspace && git add . && git commit -m "自动备份" && git push --quiet
 ```
 
-**效果：** 每天 17:00 自动备份到 GitHub
+**效果：** 每天下午 5 点自动备份，不用我管
 
-### 2. 学习卡片自动生成
+## 我今天踩的坑
 
-**修改 HEARTBEAT.md：**
-- 任务 1 从"检查用户写卡片"改为"AI 自动扫描对话生成卡片"
-- 每天 17:30 执行
+| 坑 | 原因 | 解决办法 |
+|----|------|----------|
+| 在 Windows 上执行 Linux 命令 | workspace 在阿里云服务器，不在我本地 | 回到飞书聊天或 SSH 连服务器执行 |
+| Permission denied | SSH 密钥没添加到 GitHub | 重新生成密钥并添加 |
+| Git 不知道我是谁 | 没配置 user.name/email | `git config --global user.email "6355134@qq.com"` |
+| 第一次 push 卡住 | GitHub 问信不信它的指纹 | 输入 `yes` 回车 |
 
-**修改 learning-secretary SKILL.md：**
-- 增加每日自动记录功能
-- 每周汇总功能保持不变
+## 关键命令（下次直接复制）
 
-### 3. SSH 密钥配置（前置步骤）
-
-```bash
-# 生成 SSH 密钥
-ssh-keygen -t ed25519 -C "邮箱"
-
-# 查看公钥
-cat ~/.ssh/id_ed25519.pub
-
-# 添加到 GitHub: https://github.com/settings/keys
-
-# 测试连接
-ssh -T git@github.com
-
-# 关联远程仓库
-git remote add origin git@github.com:用户名/仓库.git
-
-# 首次推送
-git add . && git commit -m "首次备份" && git push -u origin master
-```
-
-## 关键命令
-
-| 命令 | 用途 |
-|------|------|
-| `crontab -e` | 编辑定时任务 |
-| `crontab -l` | 查看定时任务 |
-| `ssh-keygen -t ed25519` | 生成 SSH 密钥 |
-| `git remote add origin` | 关联远程仓库 |
-| `git push -u origin master` | 首次推送 |
-| `git add . && git commit -m "备份" && git push` | 日常备份 |
-
-## 踩坑记录
-
-1. **SSH 密钥不存在** → 需要先生成 `ssh-keygen`
-2. **Git 不知道你是谁** → 配置 `git config user.name/email`
-3. **GitHub 指纹确认** → 第一次 push 输入 `yes`
-4. **Permission denied** → SSH 公钥没添加到 GitHub
-5. **在错误的地方执行命令** → workspace 在远程服务器，不在本地 Windows
-
-## 自动化状态
-
-| 任务 | 频率 | 状态 |
-|------|------|------|
-| Git 备份 | 每天 17:00 | ✅ 全自动 |
-| 学习卡片生成 | 每天 17:30 | ✅ 全自动 |
-| 学习周报汇总 | 每周五 17:30 | ✅ 全自动 |
-| Elon 周报 | 每周日 20:00 | ✅ 全自动 |
-
-## 下次直接用
-
-**查看 cron 任务：**
-```bash
-crontab -l
-```
-
-**手动触发备份（如果需要）：**
+**手动备份：**
 ```bash
 cd /home/admin/.openclaw/workspace && git add . && git commit -m "备份" && git push
 ```
 
-**验证 GitHub 仓库：**
+**查看备份任务：**
+```bash
+crontab -l
+```
+
+**我的 GitHub 仓库：**
 ```
 https://github.com/vlarkspur/openclaw-workspace
 ```
 
+## 耗时
+约 2 小时（09:34 - 11:50）
+
+## 下一步
+- 每天下午 5 点自动备份，我不用管了
+- 每周日收学习周报
+
 ---
-💃 金银 Studio - 学习秘书自动生成
+📝 小溪的学习卡片 - 金银自动生成
