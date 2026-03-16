@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>金银 Planet - 金属质感方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            /* 黑金金属拉丝质感背景 */
+            background: 
+                /* 金属拉丝纹理 */
+                repeating-linear-gradient(
+                    90deg,
+                    #1a1a1a 0px,
+                    #2a2a2a 1px,
+                    #1a1a1a 2px,
+                    #0d0d0d 3px
+                ),
+                /* 底层渐变 */
+                linear-gradient(
+                    160deg,
+                    #0a0a0a 0%,
+                    #1f1f1f 30%,
+                    #2d2d2d 50%,
+                    #1a1a1a 70%,
+                    #0f0f0f 100%
+                );
+            overflow: hidden;
+        }
+        
+        /* 金属光泽扫光 */
+        .metallic-sheen {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 40%,
+                rgba(255, 215, 0, 0.08) 45%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 215, 0, 0.08) 55%,
+                transparent 60%
+            );
+            transform: rotate(25deg);
+            mix-blend-mode: overlay;
+        }
+        
+        /* 中心光晕 */
+        .center-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1200px;
+            height: 1200px;
+            background: radial-gradient(
+                circle,
+                rgba(255, 215, 0, 0.12) 0%,
+                rgba(184, 134, 11, 0.06) 40%,
+                transparent 70%
+            );
+            filter: blur(60px);
+        }
+        
+        /* 四角暗角 */
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 40%,
+                rgba(0, 0, 0, 0.6) 100%
+            );
+            pointer-events: none;
+        }
+        
+        /* 标题区域 - 右上 */
+        .title-area {
+            position: absolute;
+            top: 120px;
+            right: 120px;
+            width: 900px;
+            text-align: right;
+            z-index: 10;
+        }
+        
+        .title {
+            font-size: 108px;
+            font-weight: 900;
+            /* 立体金属金字 */
+            background: linear-gradient(
+                180deg,
+                #FFE57C 0%,
+                #FFD700 20%,
+                #B8860B 50%,
+                #FFD700 80%,
+                #FFA500 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* 立体阴影 */
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5))
+                    drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+            letter-spacing: 12px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 6px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+        
+        /* 人物形象 - 左下，带羽化边缘 */
+        .character-container {
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            height: 950px;
+            z-index: 5;
+            /* 底部渐变蒙版 */
+            -webkit-mask-image: linear-gradient(
+                to top,
+                black 70%,
+                transparent 100%
+            );
+            mask-image: linear-gradient(
+                to top,
+                black 70%,
+                transparent 100%
+            );
+        }
+        
+        .character {
+            height: 100%;
+            /* 暖色调融入金属背景 */
+            filter: 
+                sepia(0.15)
+                brightness(1.08)
+                contrast(1.15)
+                drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6))
+                drop-shadow(0 0 40px rgba(255, 215, 0, 0.2));
+        }
+        
+        /* 金色边框装饰 */
+        .gold-frame {
+            position: absolute;
+            top: 80px;
+            right: 80px;
+            width: 400px;
+            height: 3px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                #FFD700 20%,
+                #FFD700 80%,
+                transparent
+            );
+        }
+        
+        /* 装饰性几何图形 */
+        .geo-shape {
+            position: absolute;
+            bottom: 150px;
+            right: 200px;
+            width: 120px;
+            height: 120px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transform: rotate(45deg);
+        }
+        
+        .geo-shape::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <!-- 背景元素 -->
+        <div class="metallic-sheen"></div>
+        <div class="center-glow"></div>
+        <div class="vignette"></div>
+        
+        <!-- 人物形象 -->
+        <div class="character-container">
+            <img src="/home/admin/.openclaw/workspace/images/jinyin-character/04-cover-final.png" alt="金银" class="character">
+        </div>
+        
+        <!-- 标题 -->
+        <div class="title-area">
+            <div class="title">金银 Planet</div>
+            <div class="subtitle">Wealth & Wisdom</div>
+        </div>
+        
+        <!-- 装饰 -->
+        <div class="gold-frame"></div>
+        <div class="geo-shape"></div>
+    </div>
+</body>
+</html>

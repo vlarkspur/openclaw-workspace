@@ -1,0 +1,30 @@
+timestamp,stock_name,stock_code,report_period,shareholder_count,prev_shareholder_count,change_rate,avg_shares_per_person,top10_shareholder_pct,concentration_signal,data_source,notes
+2026-03-14 14:10,比亚迪，002594.SZ,2025-Q4,,,,,,,同花顺，
+2026-03-14 14:10,大麦娱乐，01060.HK,2025-Q4,,,,,,,同花顺，
+2026-03-14 14:10,三六零，601360.SH,2025-Q4,,,,,,,同花顺，
+2026-03-14 14:10,吉林敖东，000623.SZ,2025-Q4,,,,,,,同花顺，
+2026-03-14 14:10,中国中铁，601390.SH,2025-Q4,,,,,,,同花顺，
+2026-03-14 14:10,理想汽车，02015.HK,2025-Q4,,,,,,,同花顺，
+2026-03-14 14:10,小米集团，01810.HK,2025-Q4,,,,,,,同花顺，
+2026-03-14 14:10,地平线机器人，09660.HK,2025-Q4,,,,,,,同花顺，
+
+# 字段说明:
+# report_period - 报告期间 (如 2025-Q4 表示 2025 年第四季度)
+# shareholder_count - 本期股东户数
+# prev_shareholder_count - 上期股东户数
+# change_rate - 股东户数变化率 = (本期 - 上期)/上期 × 100%
+# avg_shares_per_person - 人均持股数 = 总股本/股东户数
+# top10_shareholder_pct - 前 10 大流通股东持股比例
+# concentration_signal - 集中度信号 (集中/分散/中性)
+#
+# 判断标准:
+# change_rate < -5%  → 集中度提升 (信号：集中)
+# change_rate > 5%   → 集中度下降 (信号：分散)
+# -5% <= change_rate <= 5% → 中性
+#
+# 数据源优先级:
+# 1. 同花顺 iFind (最准确)
+# 2. AKShare (免费，可能有延迟)
+# 3. 公司定期报告 (最权威，但滞后)
+#
+# 更新频率: 季度 (跟随财报披露)

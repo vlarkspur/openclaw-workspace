@@ -1,0 +1,31 @@
+timestamp,action,stock_name,stock_code,quantity,price,total_amount,reason,chip_change_before,chip_change_after,next_review_date,executed_by
+,,,,,,,,,,,
+
+# 字段说明:
+# timestamp - 调仓时间 (YYYY-MM-DD HH:MM)
+# action - 操作类型 (买入/卖出/调仓/分红再投)
+# stock_name - 股票名称
+# stock_code - 股票代码
+# quantity - 数量 (股)
+# price - 成交价
+# total_amount - 总金额 (自动计算：quantity × price)
+# reason - 调仓理由 (必须填写，禁止空白)
+# chip_change_before - 调仓前筹码集中度
+# chip_change_after - 调仓后筹码集中度
+# next_review_date - 下次检视日期
+# executed_by - 执行人
+#
+# 调仓理由填写规范:
+# - 必须具体，禁止"感觉要涨"等模糊表述
+# - 参考格式："股东户数连续 2 季度下降>10%，筹码集中度提升"
+# - 参考格式："触及止损线 -15%，执行风控"
+# - 参考格式："季报超预期，净利润增长>30%"
+#
+# 调仓纪律:
+# 1. 季度调仓为主，非季度调仓需特别说明理由
+# 2. 单只股票仓位不超过 20%
+# 3. 止损线：-15% (可根据个股波动率调整)
+# 4. 每次调仓后必须设置下次检视日期
+#
+# 示例:
+# 2026-03-14 14:10,买入，比亚迪，002594.SZ,1000,250.50,250500,股东户数 Q4 下降 12%，筹码集中度提升，45%,48%,2026-06-30，小溪

@@ -1,0 +1,29 @@
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景：赛博朋克紫色 -->
+  <rect width="1920" height="1080" fill="#1A0A2E"/>
+  
+  <!-- 红色霓虹光晕 -->
+  <ellipse cx="300" cy="250" rx="200" ry="150" fill="#E94560" opacity="0.3">
+    <feGaussianBlur stdDeviation="30"/>
+  </ellipse>
+  
+  <!-- 蓝色霓虹光晕 -->
+  <ellipse cx="1500" cy="750" rx="300" ry="200" fill="#00D9FF" opacity="0.3">
+    <feGaussianBlur stdDeviation="30"/>
+  </ellipse>
+  
+  <!-- 主标题：金银 Planet -->
+  <text x="960" y="540" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="120" font-weight="bold" fill="#FFD700">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    <feGaussianBlur stdDeviation="2" in="SourceGraphic" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+    金银 Planet
+  </text>
+  
+  <!-- 装饰线条 -->
+  <line x1="100" y1="100" x2="400" y2="100" stroke="#E94560" stroke-width="3" opacity="0.6"/>
+  <line x1="1520" y1="980" x2="1820" y2="980" stroke="#00D9FF" stroke-width="3" opacity="0.6"/>
+</svg>

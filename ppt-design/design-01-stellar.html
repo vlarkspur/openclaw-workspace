@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>金银 Planet - 星空渐变方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            /* 深邃星空渐变背景 */
+            background: linear-gradient(
+                135deg,
+                #0a0a0f 0%,
+                #1a1a2e 25%,
+                #16213e 50%,
+                #0f3460 75%,
+                #1a1a2e 100%
+            );
+            overflow: hidden;
+        }
+        
+        /* 星光点缀 */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.9), transparent),
+                radial-gradient(1px 1px at 230px 80px, #ffffff, transparent),
+                radial-gradient(2px 2px at 300px 150px, rgba(255,255,255,0.7), transparent);
+            background-size: 350px 200px;
+            animation: twinkle 5s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* 金色光晕效果 */
+        .golden-glow {
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(
+                circle,
+                rgba(255, 215, 0, 0.15) 0%,
+                rgba(255, 215, 0, 0.08) 40%,
+                transparent 70%
+            );
+            filter: blur(40px);
+        }
+        
+        /* 底部光效 */
+        .bottom-light {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(
+                to top,
+                rgba(255, 215, 0, 0.1) 0%,
+                transparent 100%
+            );
+        }
+        
+        /* 标题区域 - 右侧留白 */
+        .title-area {
+            position: absolute;
+            top: 150px;
+            right: 150px;
+            width: 800px;
+            text-align: right;
+            z-index: 10;
+        }
+        
+        .title {
+            font-size: 96px;
+            font-weight: bold;
+            /* 金银双色渐变 */
+            background: linear-gradient(
+                135deg,
+                #FFD700 0%,
+                #FFA500 30%,
+                #C0C0C0 70%,
+                #E8E8E8 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+        
+        /* 人物形象 - 左侧，带渐变蒙版融合 */
+        .character-container {
+            position: absolute;
+            bottom: 0;
+            left: 80px;
+            height: 900px;
+            z-index: 5;
+            /* 左侧渐变蒙版，让边缘柔和 */
+            -webkit-mask-image: linear-gradient(
+                to right,
+                black 60%,
+                transparent 100%
+            );
+            mask-image: linear-gradient(
+                to right,
+                black 60%,
+                transparent 100%
+            );
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+        }
+        
+        .character {
+            height: 100%;
+            /* 轻微调整色调融入背景 */
+            filter: 
+                brightness(1.05)
+                contrast(1.1)
+                drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+        }
+        
+        /* 装饰线条 */
+        .decorative-line {
+            position: absolute;
+            bottom: 100px;
+            right: 150px;
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                #FFD700,
+                transparent
+            );
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <!-- 背景元素 -->
+        <div class="stars"></div>
+        <div class="golden-glow"></div>
+        <div class="bottom-light"></div>
+        
+        <!-- 人物形象 -->
+        <div class="character-container">
+            <img src="/home/admin/.openclaw/workspace/images/jinyin-character/04-cover-final.png" alt="金银" class="character">
+        </div>
+        
+        <!-- 标题 -->
+        <div class="title-area">
+            <div class="title">金银 Planet</div>
+            <div class="subtitle">财富自由 · 认知升级</div>
+        </div>
+        
+        <!-- 装饰 -->
+        <div class="decorative-line"></div>
+    </div>
+</body>
+</html>

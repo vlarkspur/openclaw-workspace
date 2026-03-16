@@ -1,0 +1,22 @@
+timestamp,stock_name,stock_code,market,price,change_pct,position_size,cost_basis,market_value,profit_loss,profit_loss_pct,weight,data_source
+2026-03-14 14:10,比亚迪，002594.SZ,A 股，,,,,,,,同花顺
+2026-03-14 14:10,大麦娱乐，01060.HK，港股，,,,,,,,同花顺
+2026-03-14 14:10,三六零，601360.SH,A 股，,,,,,,,同花顺
+2026-03-14 14:10,吉林敖东，000623.SZ,A 股，,,,,,,,同花顺
+2026-03-14 14:10,中国中铁，601390.SH,A 股，,,,,,,,同花顺
+2026-03-14 14:10,理想汽车，02015.HK，港股，,,,,,,,同花顺
+2026-03-14 14:10,小米集团，01810.HK，港股，,,,,,,,同花顺
+2026-03-14 14:10,地平线机器人，09660.HK，港股，,,,,,,,同花顺
+
+# 公式说明 (在 Excel 中设置):
+# market_value = price * position_size
+# profit_loss = (price - cost_basis) * position_size
+# profit_loss_pct = (price - cost_basis) / cost_basis * 100
+# weight = market_value / SUM(all market_value) * 100
+#
+# 更新规则:
+# 1. 每次更新新增一行，不要覆盖旧数据
+# 2. timestamp 填写当前时间
+# 3. price 和 change_pct 从同花顺/雪球获取
+# 4. position_size 和 cost_basis 仅在调仓时更新
+# 5. data_source 标注数据来源
