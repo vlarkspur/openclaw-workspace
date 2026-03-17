@@ -96,7 +96,7 @@ skills/news-sentiment/
 ## 关联知识点
 
 - 与自我提升部门协作（Elon 团队）
-- 与作品团队协作（Jobs 团队）
+- 与作品团队协作（Steve 团队）
 - 使用 TEAM_CONFIG.md 作为配置蓝图
 - 参考 Charlie_Munger_profile.md 人物档案
 

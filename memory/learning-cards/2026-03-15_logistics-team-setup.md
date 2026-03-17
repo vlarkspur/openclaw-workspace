@@ -82,7 +82,7 @@ memory/health/           # 健康数据
 ## 关联知识点
 
 - 与自我提升部门协作（Elon 团队）
-- 与作品团队协作（Jobs 团队）
+- 与作品团队协作（Steve 团队）
 - 与资产增值部门协作（Charlie 团队）
 - 参考 Ma_Weidu_profile.md 人物档案
 
