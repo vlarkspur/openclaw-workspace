@@ -1,4 +1,4 @@
-# 💃 金银 Studio 备份指南
+# 💃 金银 Planet 备份指南
 
 **最后更新：** 2026-03-15  
 **备份频率：** 每天 17:00
@@ -63,7 +63,7 @@ cp -r /home/admin/.openclaw/workspace /home/admin/backup/workspace-backup-202603
 cd /home/admin/.openclaw/workspace
 git init
 git add .
-git commit -m "Initial commit - 金银 Studio"
+git commit -m "Initial commit - 金银 Planet"
 # 然后关联远程仓库（GitHub/Gitee）
 git remote add origin <你的仓库地址>
 git push -u origin main
@@ -94,7 +94,7 @@ git push
 
 **提醒内容：**
 ```
-🕔 金银 Studio 备份时间到！
+🕔 金银 Planet 备份时间到！
 
 请执行以下操作：
 
@@ -109,7 +109,7 @@ git push
 备份指南：BACKUP_GUIDE.md
 
 ---
-💃 金银 Studio 后勤保障部
+💃 金银 Planet 后勤保障部
 ```
 
 ---
@@ -157,4 +157,4 @@ openclaw restart
 _备份是你的 AI 团队的"人寿保险"。_  
 _每天 17:00，别忘了。_
 
-💃 金银 Studio 后勤保障部 - 马未都
+💃 金银 Planet 后勤保障部 - 嘟嘟

@@ -1,4 +1,4 @@
-# Steve Jobs 档案 - 作品输出团队经理
+# Jobs 档案 - 作品输出团队经理
 
 **最后更新：** 2026-03-14  
 **数据截止：** 完整生平（2011 年去世，资料完整）
@@ -96,13 +96,13 @@
 ## 📚 推荐学习资源
 
 ### 传记
-- 《Steve Jobs》by Walter Isaacson (2011) - 官方授权传记
-- 《Becoming Steve Jobs》by Brent Schlender (2015)
-- 《Steve Jobs: The Man Who Thought Different》by Karen Blumenthal
+- 《Jobs》by Walter Isaacson (2011) - 官方授权传记
+- 《Becoming Jobs》by Brent Schlender (2015)
+- 《Jobs: The Man Who Thought Different》by Karen Blumenthal
 
 ### 纪录片/电影
-- 《Steve Jobs: The Lost Interview》(2012)
-- 《Steve Jobs》(2015 电影，Michael Fassbender 主演)
+- 《Jobs: The Lost Interview》(2012)
+- 《Jobs》(2015 电影，Michael Fassbender 主演)
 - 《Jobs》(2013 电影，Ashton Kutcher 主演)
 
 ### 经典演讲

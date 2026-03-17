@@ -12,7 +12,7 @@ if [ -z "$CARDS" ]; then
     MESSAGE="💡 今日学习检查完成，今天没有新学习内容。继续保持！
 
 ---
-💃 金银 Studio 学习秘书"
+💃 金银 Planet 学习秘书"
 else
     # 统计卡片数量
     COUNT=$(echo "$CARDS" | wc -l)
@@ -33,8 +33,8 @@ $TOPICS
 卡片位置：\`memory/learning-cards/\`
 
 ---
-💃 金银 Studio 学习秘书"
+💃 金银 Planet 学习秘书"
 fi
 
-# 发送飞书消息
-openclaw message send --channel "feishu" --message "$MESSAGE"
+# 发送飞书消息（自动发送到当前对话渠道）
+openclaw message send --channel "feishu" --target "user:ou_1a1f31c9c706ce055aa792b5870a00c5" --message "$MESSAGE"
