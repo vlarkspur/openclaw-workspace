@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金银 Planet PPT - 已完成作品预览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #fff;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #a0a0a0;
+        }
+        .status-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+        .status-bar h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .progress-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4ade80;
+        }
+        .progress-item.pending {
+            border-left-color: #fbbf24;
+        }
+        .progress-item h3 {
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        .progress-item p {
+            font-size: 0.85em;
+            color: #a0a0a0;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-image {
+            width: 100%;
+            height: 225px;
+            object-fit: cover;
+            background: #000;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-stellar { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .tag-metallic { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .tag-spotlight { background: linear-gradient(135deg, #ffd700, #ffed4e); color: #000; }
+        .tag-wong1 { background: linear-gradient(135deg, #0f4c75, #3282b8); }
+        .tag-wong2 { background: linear-gradient(135deg, #ff6b6b, #feca57); }
+        .card h3 {
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+        .card p {
+            font-size: 0.9em;
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8em;
+            color: #808080;
+        }
+        .file-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85em;
+            transition: background 0.3s ease;
+        }
+        .file-link:hover {
+            background: rgba(255,215,0,0.3);
+        }
+        .section-title {
+            font-size: 1.8em;
+            margin: 50px 0 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+        .file-list {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        .file-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        .file-name {
+            color: #4ade80;
+        }
+        .file-size {
+            color: #808080;
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #808080;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💃 金银 Planet PPT 项目</h1>
+            <p class="subtitle">已完成作品预览 · 更新于 2026-03-18</p>
+        </header>
+
+        <div class="status-bar">
+            <h2>📊 项目进度</h2>
+            <div class="progress-grid">
+                <div class="progress-item">
+                    <h3>✅ 封面设计</h3>
+                    <p>5 个方案全部完成</p>
+                </div>
+                <div class="progress-item">
+                    <h3>✅ 封面 PPT</h3>
+                    <p>已生成可编辑文件</p>
+                </div>
+                <div class="progress-item pending">
+                    <h3>⏸️ 内页设计</h3>
+                    <p>11 页待制作</p>
+                </div>
+                <div class="progress-item pending">
+                    <h3>⏸️ 完整整合</h3>
+                    <p>待内页完成后合并</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎨 封面设计方案（5 个）</h2>
+        
+        <div class="gallery">
+            <div class="card">
+                <img src="ppt-design/cover-01-stellar.png" alt="方案一：星空渐变" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag tag-stellar">方案一</span>
+                    <h3>星空渐变 Stellar</h3>
+                    <p>深邃宇宙感，知识如星辰。深蓝紫色星空渐变背景，金色光晕，人物渐变蒙版羽化，金银双色渐变文字。</p>
+                    <div class="card-meta">
+                        <span>1920×1080 · 1.5MB</span>
+                        <a href="ppt-design/cover-01-stellar.png" class="file-link" target="_blank">查看原图 →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="ppt-design/cover-02-metallic.png" alt="方案二：金属质感" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag tag-metallic">方案二</span>
+                    <h3>金属质感 Metallic</h3>
+                    <p>专业金融感，财富与品质。黑金金属拉丝纹理，中心金色光晕，立体金属金字，金色边框装饰。</p>
+                    <div class="card-meta">
+                        <span>1920×1080 · 1.5MB</span>
+                        <a href="ppt-design/cover-02-metallic.png" class="file-link" target="_blank">查看原图 →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="ppt-design/cover-03-spotlight.png" alt="方案三：聚光灯" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag tag-spotlight">方案三</span>
+                    <h3>聚光灯 Spotlight</h3>
+                    <p>舞台聚焦感，主角登场。纯黑背景 + 顶部金色聚光灯，光束粒子浮动，居中强发光金字。</p>
+                    <div class="card-meta">
+                        <span>1920×1080 · 748KB</span>
+                        <a href="ppt-design/cover-03-spotlight.png" class="file-link" target="_blank">查看原图 →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="ppt-design/cover-wong-01-chongqing.png" alt="方案四：王家卫·重庆森林" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag tag-wong1">方案四 🎬</span>
+                    <h3>王家卫·重庆森林</h3>
+                    <p>都市孤独感，冷调电影美学。蓝绿色调 + 模糊霓虹光斑，散景光斑浮动，竖排书法体，时间戳诗意独白。</p>
+                    <div class="card-meta">
+                        <span>1920×1080 · 2.5MB</span>
+                        <a href="ppt-design/cover-wong-01-chongqing.png" class="file-link" target="_blank">查看原图 →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="ppt-design/cover-wong-02-inthemood.png" alt="方案五：王家卫·花样年华" class="card-image">
+                <div class="card-content">
+                    <span class="card-tag tag-wong2">方案五 🎬</span>
+                    <h3>王家卫·花样年华</h3>
+                    <p>怀旧浪漫感，暖调电影美学。暖黄色调 + 复古霓虹，柔和光晕，竖排书法体，年份季节诗意独白。</p>
+                    <div class="card-meta">
+                        <span>1920×1080 · 2.5MB</span>
+                        <a href="ppt-design/cover-wong-02-inthemood.png" class="file-link" target="_blank">查看原图 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📁 已生成文件清单</h2>
+        
+        <div class="file-list">
+            <div class="file-item">
+                <span class="file-name">ppt-design/cover-01-stellar.png</span>
+                <span class="file-size">1.5 MB</span>
+            </div>
+            <div class="file-item">
+                <span class="file-name">ppt-design/cover-02-metallic.png</span>
+                <span class="file-size">1.5 MB</span>
+            </div>
+            <div class="file-item">
+                <span class="file-name">ppt-design/cover-03-spotlight.png</span>
+                <span class="file-size">748 KB</span>
+            </div>
+            <div class="file-item">
+                <span class="file-name">ppt-design/cover-wong-01-chongqing.png</span>
+                <span class="file-size">2.5 MB</span>
+            </div>
+            <div class="file-item">
+                <span class="file-name">ppt-design/cover-wong-02-inthemood.png</span>
+                <span class="file-size">2.5 MB</span>
+            </div>
+            <div class="file-item">
+                <span class="file-name">ppt/01-封面 - 最终版.pptx</span>
+                <span class="file-size">4.3 MB</span>
+            </div>
+            <div class="file-item">
+                <span class="file-name">ppt-design/DESIGN_SUMMARY.md</span>
+                <span class="file-size">设计文档</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>💃 金银 Planet · 作品部 Steve 队制作</p>
+            <p>文件位置：/home/admin/.openclaw/workspace/</p>
+        </footer>
+    </div>
+</body>
+</html>

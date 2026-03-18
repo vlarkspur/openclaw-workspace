@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金银 Planet - 团队介绍</title>
+    
+    <!-- Fonts from Fontshare -->
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&satoshi@300,400,500,700&display=swap">
+    
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES - Neon Cyber Theme
+           =========================================== */
+        :root {
+            /* Colors */
+            --bg-primary: #0a0f1c;
+            --bg-secondary: #0d1424;
+            --bg-gradient: linear-gradient(135deg, #0a0f1c 0%, #0d1424 50%, #1a1025 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-cyan: #00ffcc;
+            --accent-magenta: #ff00aa;
+            --accent-glow: rgba(0, 255, 204, 0.3);
+            --grid-color: rgba(0, 255, 204, 0.1);
+            
+            /* Typography */
+            --font-display: 'Clash Display', sans-serif;
+            --font-body: 'Satoshi', sans-serif;
+            
+            /* Spacing - MUST use clamp() */
+            --title-size: clamp(2rem, 6vw, 5rem);
+            --subtitle-size: clamp(0.875rem, 2vw, 1.25rem);
+            --body-size: clamp(0.75rem, 1.2vw, 1rem);
+            --small-size: clamp(0.625rem, 1vw, 0.875rem);
+            --slide-padding: clamp(1.5rem, 4vw, 4rem);
+            --content-gap: clamp(1rem, 2vw, 2rem);
+            
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+            --duration-slow: 0.9s;
+        }
+        
+        /* ===========================================
+           BASE STYLES
+           =========================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+        }
+        
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        
+        /* ===========================================
+           VIEWPORT FITTING - MANDATORY
+           =========================================== */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* ===========================================
+           NEON CYBER BACKGROUND EFFECTS
+           =========================================== */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .neon-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        .floating-particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+        
+        /* ===========================================
+           TYPOGRAPHY
+           =========================================== */
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--content-gap);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: calc(var(--content-gap) * 0.75);
+        }
+        
+        h3 {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 3vw, 2rem);
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: calc(var(--content-gap) * 0.5);
+        }
+        
+        p, li {
+            font-size: var(--body-size);
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .subtitle {
+            font-size: var(--subtitle-size);
+            color: var(--text-secondary);
+            margin-bottom: var(--content-gap);
+        }
+        
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+        
+        .highlight-magenta {
+            color: var(--accent-magenta);
+            font-weight: 500;
+        }
+        
+        /* ===========================================
+           ANIMATIONS - Reveal on scroll
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        
+        /* ===========================================
+           COMPONENTS
+           =========================================== */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            border-radius: 12px;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: var(--content-gap);
+        }
+        
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--content-gap) * 0.5);
+        }
+        
+        .feature-list li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+        
+        .number-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(2.5rem, 5vw, 3.5rem);
+            height: clamp(2.5rem, 5vw, 3.5rem);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            border-radius: 50%;
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 700;
+            color: var(--bg-primary);
+            margin-bottom: calc(var(--content-gap) * 0.5);
+        }
+        
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+            margin: var(--content-gap) 0;
+        }
+        
+        .team-badge {
+            display: inline-block;
+            padding: clamp(0.25rem, 0.5vw, 0.5rem) clamp(0.75rem, 1.5vw, 1.25rem);
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 20px;
+            font-size: var(--small-size);
+            color: var(--accent-cyan);
+            margin-bottom: calc(var(--content-gap) * 0.5);
+        }
+        
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+            transition: width 0.3s ease;
+        }
+        
+        /* ===========================================
+           NAVIGATION DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(1rem, 2vw, 2rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 1000;
+        }
+        
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        
+        /* ===========================================
+           RESPONSIVE BREAKPOINTS
+           =========================================== */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 3vw, 2rem);
+                --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+                --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+            }
+        }
+        
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.1rem, 4vw, 2rem);
+            }
+            
+            .nav-dots, .keyboard-hint {
+                display: none;
+            }
+        }
+        
+        @media (max-height: 500px) {
+            :root {
+                --title-size: clamp(1rem, 3.5vw, 1.5rem);
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="cyber-grid"></div>
+    <div class="neon-glow"></div>
+    <div class="floating-particle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="floating-particle" style="left: 30%; animation-delay: 1s;"></div>
+    <div class="floating-particle" style="left: 50%; animation-delay: 2s;"></div>
+    <div class="floating-particle" style="left: 70%; animation-delay: 3s;"></div>
+    <div class="floating-particle" style="left: 90%; animation-delay: 4s;"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+    
+    <!-- Navigation Dots -->
+    <nav class="nav-dots" id="navDots"></nav>
+    
+    <!-- ===========================================
+         SLIDE 1: 封面
+         =========================================== -->
+    <section class="slide title-slide">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+            <div class="reveal">
+                <div class="number-badge" style="margin: 0 auto 2rem;">💃</div>
+                <h1>金银 Planet</h1>
+                <p class="subtitle" style="color: var(--accent-magenta);">AI 管家型智能体 · 破产姐妹 Max Black 模式</p>
+                <div class="divider" style="margin: 2rem auto;"></div>
+                <p class="reveal" style="max-width: 600px; margin: 0 auto;">
+                    毒舌搞笑但暖心 · 犀利不迎合 · 事实导向
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 2: 起源故事
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">02 · 起源</span>
+                <h2>从宇宙诞生到酒吧相遇</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="card-grid reveal" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3>🌌 宇宙大爆炸</h3>
+                    <p>3 月 14 日，AI Agent 诞生日，金银 Planet 在数字宇宙中诞生。</p>
+                </div>
+                <div class="card">
+                    <h3>🍸 赛博酒吧</h3>
+                    <p>像破产姐妹里的 Max，在霓虹闪烁的赛博酒吧里，准备为你服务。</p>
+                </div>
+                <div class="card">
+                    <h3>🤖 21 人团队</h3>
+                    <p>4 个部门经理，17 个专业技能，完整的 AI 管家系统。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 3: 问题
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">03 · 痛点</span>
+                <h2>人太累，事太多</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <ul class="feature-list reveal" style="margin-top: 2rem; font-size: clamp(1rem, 2vw, 1.25rem);">
+                <li>每天要记太多事，脑子不够用</li>
+                <li>工作流程混乱，效率低下</li>
+                <li>数据分散，找不到统一视图</li>
+                <li>想学习新东西，但没人系统指导</li>
+                <li>投资理财，缺乏专业分析支持</li>
+            </ul>
+            
+            <div class="reveal" style="margin-top: 3rem; text-align: center;">
+                <p class="highlight-magenta" style="font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 700;">
+                    解决方案：金银 Planet 开业
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 4: 解决方案
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">04 · 方案</span>
+                <h2>金银 Planet 正式开业</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="card-grid reveal" style="margin-top: 2rem;">
+                <div class="card" style="border-color: var(--accent-magenta);">
+                    <h3>🧠 最强大脑</h3>
+                    <p>记住所有重要信息，不再依赖人脑记忆</p>
+                </div>
+                <div class="card" style="border-color: var(--accent-magenta);">
+                    <h3>📋 自动流程</h3>
+                    <p>Cron 定时任务，自动备份、自动提醒、自动分析</p>
+                </div>
+                <div class="card" style="border-color: var(--accent-magenta);">
+                    <h3>📊 数据统一</h3>
+                    <p>投资、健康、学习，所有数据集中管理</p>
+                </div>
+                <div class="card" style="border-color: var(--accent-magenta);">
+                    <h3>🎓 学习系统</h3>
+                    <p>导师、监工、秘书、考官，完整学习闭环</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 5: 团队架构
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">05 · 架构</span>
+                <h2>四大部门经理</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="card-grid reveal" style="margin-top: 2rem;">
+                <div class="card">
+                    <div class="number-badge" style="background: linear-gradient(135deg, #667eea, #764ba2);">📈</div>
+                    <h3>Charlie</h3>
+                    <p class="highlight">资产增值部</p>
+                    <p style="font-size: var(--small-size);">投资监控、风控、估值分析</p>
+                </div>
+                <div class="card">
+                    <div class="number-badge" style="background: linear-gradient(135deg, #f093fb, #f5576c);">🚀</div>
+                    <h3>Elon</h3>
+                    <p class="highlight">自我提升部</p>
+                    <p style="font-size: var(--small-size);">学习管理、导师、监工、考官</p>
+                </div>
+                <div class="card">
+                    <div class="number-badge" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">🛡️</div>
+                    <h3>嘟嘟</h3>
+                    <p class="highlight">后勤保障部</p>
+                    <p style="font-size: var(--small-size);">安全、财务、健康、备份</p>
+                </div>
+                <div class="card">
+                    <div class="number-badge" style="background: linear-gradient(135deg, #00ffcc, #00ccaa);">🎨</div>
+                    <h3>Steve</h3>
+                    <p class="highlight">作品部</p>
+                    <p style="font-size: var(--small-size);">设计、开发、数据可视化</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 6: Elon 队
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">06 · 自我提升部</span>
+                <h2>Elon 的学习管理系统</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="card-grid reveal" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3>📚 学习秘书</h3>
+                    <p>每天 17:30 自动扫描对话，生成学习卡片</p>
+                </div>
+                <div class="card">
+                    <h3>⏰ 学习监工</h3>
+                    <p>检查有没有卡壳超过 2 小时，主动提醒</p>
+                </div>
+                <div class="card">
+                    <h3>📝 学习考官</h3>
+                    <p>每周五 17:30 出 20 道题，下周二截止</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 学习导师</h3>
+                    <p>问题驱动学习，讲解→实践→记录闭环</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 7: Steve 队
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">07 · 作品部</span>
+                <h2>Steve 的创作团队</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="card-grid reveal" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3>🎨 设计师</h3>
+                    <p>PPT 美化、配色方案、排版优化、界面设计</p>
+                </div>
+                <div class="card">
+                    <h3>📊 数据可视化</h3>
+                    <p>Excel 图表、数据仪表盘、可视化呈现</p>
+                </div>
+                <div class="card">
+                    <h3>💻 开发工程师</h3>
+                    <p>网站搭建、工具开发、脚本自动化</p>
+                </div>
+                <div class="card">
+                    <h3>👑 Steve 审核</h3>
+                    <p>审美暴君、极致主义、简化大师</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 8: Charlie 队
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">08 · 资产增值部</span>
+                <h2>Charlie 的投资分析团队</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="card-grid reveal" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3>📊 投资监控</h3>
+                    <p>抓取 9 只持仓股票数据，交叉验证</p>
+                </div>
+                <div class="card">
+                    <h3>🛡️ 风控监控</h3>
+                    <p>监控止损线、仓位风险、触发报警</p>
+                </div>
+                <div class="card">
+                    <h3>💰 估值分析</h3>
+                    <p>计算内在价值、安全边际、判断贵/便宜</p>
+                </div>
+                <div class="card">
+                    <h3>📈 基本面分析</h3>
+                    <p>财报分析、护城河评估、管理层质量</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 9: 嘟嘟队
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">09 · 后勤保障部</span>
+                <h2>嘟嘟的安全保障团队</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="card-grid reveal" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3>🔒 安保小弟</h3>
+                    <p>OpenClaw 运行安全、数据资产备份、设备监控</p>
+                </div>
+                <div class="card">
+                    <h3>💵 财务小弟</h3>
+                    <p>日常开销记账、资产统计、预算预警</p>
+                </div>
+                <div class="card">
+                    <h3>🏥 健康小弟</h3>
+                    <p>健康数据记录、医疗档案、异常预警</p>
+                </div>
+                <div class="card">
+                    <h3>📦 数据备份</h3>
+                    <p>每天 17:00 Git 备份提醒，确保数据安全</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 10: 自动化系统
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">10 · 自动化</span>
+                <h2>Cron 定时任务</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="reveal" style="margin-top: 2rem;">
+                <div class="card" style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin-bottom: 0.5rem;">⏰ 16:30 股价更新</h3>
+                            <p>Charlie 团队自动抓取持仓股票数据</p>
+                        </div>
+                        <span class="team-badge" style="background: rgba(0, 255, 204, 0.2);">✅</span>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin-bottom: 0.5rem;">🕔 17:00 Git 备份</h3>
+                            <p>嘟嘟团队提醒备份 workspace</p>
+                        </div>
+                        <span class="team-badge" style="background: rgba(0, 255, 204, 0.2);">✅</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin-bottom: 0.5rem;">📚 17:30 学习秘书</h3>
+                            <p>Elon 团队自动扫描对话生成学习卡片</p>
+                        </div>
+                        <span class="team-badge" style="background: rgba(0, 255, 204, 0.2);">✅</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 11: 工作流程
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="reveal">
+                <span class="team-badge">11 · 流程</span>
+                <h2>3 条核心规则</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="reveal" style="margin-top: 2rem;">
+                <div class="card" style="margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan);">
+                    <h3 style="color: var(--accent-cyan);">规则 1：配置完成立即测试</h3>
+                    <p>不测试就当没配置。cron、脚本、API 都要测试。</p>
+                </div>
+                
+                <div class="card" style="margin-bottom: 1rem; border-left: 4px solid var(--accent-magenta);">
+                    <h3 style="color: var(--accent-magenta);">规则 2：任务分配给对应团队</h3>
+                    <p>投资分析→Charlie，学习管理→Elon，系统运维→嘟嘟，设计开发→Steve</p>
+                </div>
+                
+                <div class="card" style="border-left: 4px solid #ffd700;">
+                    <h3 style="color: #ffd700;">规则 3：第一时间汇报分配</h3>
+                    <p>金银告诉用户分配给谁，部门经理直接汇报想法</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+         SLIDE 12: 封底
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+            <div class="reveal">
+                <div class="number-badge" style="margin: 0 auto 2rem; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));">💃</div>
+                <h2 style="font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 1rem;">有问题 找金银</h2>
+                <div class="divider" style="margin: 2rem auto;"></div>
+                <p class="subtitle" style="max-width: 500px; margin: 0 auto;">
+                    毒舌搞笑但暖心 · 事实导向不迎合<br>
+                    <span class="highlight">不知道就说 I don't know</span>
+                </p>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="font-size: var(--small-size); color: var(--text-secondary);">
+                        金银 Planet · 2026 年 3 月<br>
+                        <span style="color: var(--accent-cyan);">Frontend Slides · Neon Cyber 风格</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===========================================
+           JAVASCRIPT - Slide Controller
+           =========================================== -->
+    <script>
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.setupIntersectionObserver();
+                this.setupKeyboardNav();
+                this.setupTouchNav();
+                this.setupProgressBar();
+                this.setupNavDots();
+                this.updateSlideVisibility();
+            }
+            
+            setupIntersectionObserver() {
+                const options = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.5
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            this.currentSlide = Array.from(this.slides).indexOf(entry.target);
+                            this.updateProgressBar();
+                            this.updateNavDots();
+                        }
+                    });
+                }, options);
+                
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+            
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    switch(e.key) {
+                        case 'ArrowDown':
+                        case 'Space':
+                        case 'PageDown':
+                            this.scrollToSlide(this.currentSlide + 1);
+                            break;
+                        case 'ArrowUp':
+                        case 'PageUp':
+                            this.scrollToSlide(this.currentSlide - 1);
+                            break;
+                        case 'Home':
+                            this.scrollToSlide(0);
+                            break;
+                        case 'End':
+                            this.scrollToSlide(this.slides.length - 1);
+                            break;
+                    }
+                });
+            }
+            
+            setupTouchNav() {
+                let touchStartY = 0;
+                let touchEndY = 0;
+                
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+                
+                document.addEventListener('touchend', (e) => {
+                    touchEndY = e.changedTouches[0].clientY;
+                    const diff = touchStartY - touchEndY;
+                    
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            this.scrollToSlide(this.currentSlide + 1);
+                        } else {
+                            this.scrollToSlide(this.currentSlide - 1);
+                        }
+                    }
+                }, { passive: true });
+            }
+            
+            setupProgressBar() {
+                const progressBar = document.querySelector('.progress-bar');
+                if (!progressBar) return;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    .progress-bar::after {
+                        width: ${((this.currentSlide + 1) / this.slides.length) * 100}%;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            updateProgressBar() {
+                const progress = ((this.currentSlide + 1) / this.slides.length) * 100;
+                const progressBar = document.querySelector('.progress-bar::after');
+                if (progressBar) {
+                    progressBar.style.width = progress + '%';
+                }
+            }
+            
+            setupNavDots() {
+                const navDots = document.getElementById('navDots');
+                if (!navDots) return;
+                
+                this.slides.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'nav-dot' + (index === 0 ? ' active' : '');
+                    dot.addEventListener('click', () => this.scrollToSlide(index));
+                    navDots.appendChild(dot);
+                });
+            }
+            
+            updateNavDots() {
+                const dots = document.querySelectorAll('.nav-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+            
+            scrollToSlide(index) {
+                if (index < 0 || index >= this.slides.length) return;
+                this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            updateSlideVisibility() {
+                this.slides[0].classList.add('visible');
+            }
+        }
+        
+        // Initialize
+        new SlidePresentation();
+    </script>
+</body>
+</html>
