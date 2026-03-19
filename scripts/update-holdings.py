@@ -4,15 +4,16 @@
 股票数据自动更新脚本
 - 抓取 9 只持仓股票的最新股价
 - 更新 holdings.md 文件
-- 可选：发送飞书通知
+- 输出 JSON 数据（供 HEARTBEAT 调用）
 
 用法：
-    python3 update-holdings.py [--notify]
+    python3 update-holdings.py --json
 """
 
 import urllib.request
 import re
 import sys
+import json
 from datetime import datetime, timedelta
 
 # 股票代码列表（腾讯财经格式）
@@ -129,6 +130,11 @@ def update_holdings_file(prices):
     return True
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--json', action='store_true', help='输出 JSON 格式')
+    args = parser.parse_args()
+    
     print(f"=== 股票数据自动更新 ===")
     print(f"时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("")
@@ -144,6 +150,17 @@ def main():
     # 更新文件
     if update_holdings_file(prices):
         print("✅ 更新完成")
+        
+        # 如果指定 --json，输出 JSON 数据供 HEARTBEAT 调用
+        if args.json:
+            output = {
+                'date': datetime.now().strftime("%Y-%m-%d"),
+                'prices': prices
+            }
+            print("JSON_START")
+            print(json.dumps(output, ensure_ascii=False))
+            print("JSON_END")
+        
         sys.exit(0)
     else:
         print("❌ 更新失败")
