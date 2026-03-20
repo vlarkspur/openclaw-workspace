@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理想汽车 (02015.HK) - Charlie 团队分析报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header .meta {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+        }
+        
+        .decision-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .decision-box.danger {
+            background: linear-gradient(135deg, #f5576c 0%, #d4145a 100%);
+        }
+        
+        .decision-box.success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+        }
+        
+        .decision-box.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .decision-box table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .decision-box td {
+            padding: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .decision-box td:first-child {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #f0f0f0;
+        }
+        
+        .signal {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .signal-red {
+            background: #ffe0e0;
+            color: #d4145a;
+        }
+        
+        .signal-yellow {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .signal-green {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe082 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f5576c;
+            margin: 15px 0;
+        }
+        
+        .quote {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .quote strong {
+            color: #667eea;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .badge-red {
+            background: #d4145a;
+            color: white;
+        }
+        
+        .badge-yellow {
+            background: #f5576c;
+            color: white;
+        }
+        
+        .badge-green {
+            background: #56ab2f;
+            color: white;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            border-top: 2px solid #667eea;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .content {
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 理想汽车 (02015.HK)</h1>
+            <p class="meta">Charlie 团队分析报告 · 2026-03-20</p>
+        </div>
+        
+        <div class="content">
+            <!-- 核心结论 -->
+            <div class="section">
+                <h2>📊 一、核心结论</h2>
+                <div class="decision-box danger">
+                    <h3 style="color: white; margin-bottom: 15px;">🔴 决策：减仓</h3>
+                    <table>
+                        <tr>
+                            <td>当前仓位</td>
+                            <td>12.5%（2,700 股，市值~18 万 HKD）</td>
+                        </tr>
+                        <tr>
+                            <td>目标仓位</td>
+                            <td>3-5%（降至 600-1,000 股）</td>
+                        </tr>
+                        <tr>
+                            <td>减仓价格区间</td>
+                            <td>65-70 HKD（当前价 66.85 HKD）</td>
+                        </tr>
+                        <tr>
+                            <td>止损线</td>
+                            <td>-15%（54 HKD）</td>
+                        </tr>
+                        <tr>
+                            <td>核心逻辑</td>
+                            <td>基本面恶化（净利润 -86%、营收 -22%）、估值极高（PE 114 倍）、竞争地位下滑（唯一销量萎缩的新势力）</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 四层过滤分析 -->
+            <div class="section">
+                <h2>🔍 二、四层过滤分析</h2>
+                
+                <h3>🌍 第一层：国际局势</h3>
+                <table>
+                    <tr>
+                        <th>检查项</th>
+                        <th>理想汽车情况</th>
+                        <th>风险等级</th>
+                    </tr>
+                    <tr>
+                        <td>芯片依赖</td>
+                        <td>增程式电动车，车规级芯片影响有限</td>
+                        <td><span class="signal signal-green">🟢 低</span></td>
+                    </tr>
+                    <tr>
+                        <td>芯片成本占比</td>
+                        <td>约 3-5%（低于手机行业 20-30%）</td>
+                        <td><span class="signal signal-green">🟢 低</span></td>
+                    </tr>
+                    <tr>
+                        <td>地缘政治直接影响</td>
+                        <td>无海外工厂，主要市场在中国</td>
+                        <td><span class="signal signal-green">🟢 低</span></td>
+                    </tr>
+                    <tr>
+                        <td>关税壁垒风险</td>
+                        <td>出口占比低（&lt;5%），影响小</td>
+                        <td><span class="signal signal-green">🟢 低</span></td>
+                    </tr>
+                </table>
+                
+                <h3>🇨🇳 第二层：国家政策</h3>
+                <table>
+                    <tr>
+                        <th>检查项</th>
+                        <th>理想汽车情况</th>
+                        <th>风险等级</th>
+                    </tr>
+                    <tr>
+                        <td>GDP 目标 4.5-5%</td>
+                        <td>中性，汽车消费受经济影响</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>PMI 49.0%（收缩）</td>
+                        <td>制造业收缩，需求承压</td>
+                        <td><span class="signal signal-red">🔴 高</span></td>
+                    </tr>
+                    <tr>
+                        <td>房地产投资 -11.1%</td>
+                        <td>中产阶级财富缩水，影响高端消费</td>
+                        <td><span class="signal signal-red">🔴 高</span></td>
+                    </tr>
+                    <tr>
+                        <td>以旧换新政策</td>
+                        <td>新能源 8-12% 补贴，理想受益</td>
+                        <td><span class="signal signal-green">🟢 利好</span></td>
+                    </tr>
+                </table>
+                
+                <h3>🏭 第三层：行业分析</h3>
+                <div class="highlight">
+                    <strong>⚠️ 关键发现：</strong> 理想是 2025 年唯一销量萎缩的主流新势力
+                </div>
+                <table>
+                    <tr>
+                        <th>公司</th>
+                        <th>2025 年销量</th>
+                        <th>同比</th>
+                        <th>市场地位</th>
+                    </tr>
+                    <tr>
+                        <td>比亚迪</td>
+                        <td>460.24 万辆</td>
+                        <td><span class="signal signal-green">+28%</span></td>
+                        <td>全球第一</td>
+                    </tr>
+                    <tr>
+                        <td>特斯拉</td>
+                        <td>163.6 万辆</td>
+                        <td><span class="signal signal-red">-8.6%</span></td>
+                        <td>连续 2 年下滑</td>
+                    </tr>
+                    <tr>
+                        <td><strong>理想汽车</strong></td>
+                        <td><strong>40.63 万辆</strong></td>
+                        <td><span class="signal signal-red"><strong>-18.8%</strong></span></td>
+                        <td><strong>新势力唯一萎缩</strong></td>
+                    </tr>
+                    <tr>
+                        <td>小米汽车</td>
+                        <td>41 万辆</td>
+                        <td><span class="signal signal-green">新进入者</span></td>
+                        <td>超预期</td>
+                    </tr>
+                </table>
+                
+                <h3>🏢 第四层：公司分析</h3>
+                <table>
+                    <tr>
+                        <th>指标</th>
+                        <th>2025 年</th>
+                        <th>2024 年</th>
+                        <th>变化</th>
+                        <th>信号</th>
+                    </tr>
+                    <tr>
+                        <td>营收</td>
+                        <td>1,123 亿</td>
+                        <td>1,445 亿</td>
+                        <td><span class="signal signal-red">-22.25%</span></td>
+                        <td>🔴 萎缩</td>
+                    </tr>
+                    <tr>
+                        <td>归母净利润</td>
+                        <td>11.24 亿</td>
+                        <td>80.32 亿</td>
+                        <td><span class="signal signal-red">-86.00%</span></td>
+                        <td>🔴 暴跌</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率</td>
+                        <td>18.68%</td>
+                        <td>20.53%</td>
+                        <td><span class="signal signal-yellow">-1.85pp</span></td>
+                        <td>🟡 下滑</td>
+                    </tr>
+                    <tr>
+                        <td>ROE</td>
+                        <td>1.57%</td>
+                        <td>12.26%</td>
+                        <td><span class="signal signal-red">-10.69pp</span></td>
+                        <td>🔴 恶化</td>
+                    </tr>
+                    <tr>
+                        <td>现金储备</td>
+                        <td>1,012 亿</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>🟢 充裕</td>
+                    </tr>
+                    <tr>
+                        <td>研发投入</td>
+                        <td>113 亿</td>
+                        <td>-</td>
+                        <td>新高</td>
+                        <td>🟡 高投入</td>
+                    </tr>
+                </table>
+                
+                <div class="highlight">
+                    <strong>🔍 深层原因（Charlie 深挖）：</strong><br>
+                    <strong>战略性投入：All in AI</strong><br>
+                    • 2025 年研发投入 113 亿，AI 占 50%（约 57 亿）<br>
+                    • 2026 年预算：研发 120 亿，AI 继续占 50%（约 60 亿）<br>
+                    • 自研芯片"马赫 100"已完成流片并启动路测<br>
+                    • 李想："汽车的终极形态就是机器人"
+                </div>
+            </div>
+            
+            <!-- 反面论证 -->
+            <div class="section">
+                <h2>🔄 三、反面论证</h2>
+                <table>
+                    <tr>
+                        <th>反面问题</th>
+                        <th>回答</th>
+                        <th>可信度</th>
+                    </tr>
+                    <tr>
+                        <td>如果 2026 年销量再 -20%，公司能活吗？</td>
+                        <td>能，现金储备 1,012 亿，可支撑 2-3 年</td>
+                        <td><span class="signal signal-green">🟢 高</span></td>
+                    </tr>
+                    <tr>
+                        <td>如果 AI 投入 57 亿打水漂，股东能承受吗？</td>
+                        <td>短期能，但 ROE 会恶化，股价可能 -50%</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>李想"All in AI"是远见还是逃避？</td>
+                        <td>需要 2026 年验证：马赫 100 芯片量产、具身智能落地</td>
+                        <td><span class="signal signal-yellow">⏳ 待验证</span></td>
+                    </tr>
+                    <tr>
+                        <td>和特斯拉 2019 年对比，理想 AI 胜算几何？</td>
+                        <td>特斯拉有 FSD 数据优势，理想有中国市场优势，胜算 40-50%</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- 风控建议 -->
+            <div class="section">
+                <h2>🛡️ 四、风控建议</h2>
+                <div class="decision-box warning">
+                    <table>
+                        <tr>
+                            <td>减仓幅度</td>
+                            <td>1,700-2,100 股（63-78% 仓位）</td>
+                        </tr>
+                        <tr>
+                            <td>减仓价格区间</td>
+                            <td>65-70 HKD（当前价 66.85 HKD）</td>
+                        </tr>
+                        <tr>
+                            <td>分批策略</td>
+                            <td>3 批（65、67、70 HKD 各 1/3）</td>
+                        </tr>
+                        <tr>
+                            <td>硬止损</td>
+                            <td>54 HKD（-15%）</td>
+                        </tr>
+                        <tr>
+                            <td>关键观察点</td>
+                            <td>月度销量&lt;2 万辆、毛利率&lt;15%、净利率&lt;0%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Charlie 综合建议 -->
+            <div class="section">
+                <h2>💡 五、Charlie 综合建议</h2>
+                <div class="quote">
+                    <p><strong>关于 All in AI：</strong></p>
+                    <p>李想的选择我理解——AI 是下一个 10 年的门票。</p>
+                    <p>但 113 亿研发投入，57 亿砸向 AI，换来的是净利润 -86%。</p>
+                    <p>这是<strong>长期正确、短期痛苦</strong>的战略。</p>
+                    <p>问题是：市场愿意给 2-3 年等待期吗？</p>
+                    <p>113 倍 PE 已经定价了 AI 成功——如果 2026 年无法落地，股价可能 -50%。</p>
+                    <p style="margin-top: 15px;"><strong>减仓不是否定李想，是尊重风险收益比。</strong></p>
+                    <p>保留 3-5% 观察仓，给 AI 战略一个验证机会。</p>
+                    <p>如果马赫 100 芯片量产顺利、具身智能落地，你可以加仓。</p>
+                    <p>如果继续烧钱但无成果，你已提前减仓。</p>
+                    <p style="margin-top: 15px; color: #667eea;"><strong>这就是风控——不是赌对错，是管理不确定性。</strong></p>
+                </div>
+            </div>
+            
+            <!-- 下一步行动 -->
+            <div class="section">
+                <h2>📅 六、下一步行动</h2>
+                <table>
+                    <tr>
+                        <th>日期</th>
+                        <th>任务</th>
+                        <th>状态</th>
+                    </tr>
+                    <tr>
+                        <td>2026-03-21</td>
+                        <td>执行减仓（65-70 HKD）</td>
+                        <td><span class="signal signal-yellow">⏳ 待执行</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-24</td>
+                        <td>小米年报发布</td>
+                        <td><span class="signal signal-yellow">⏳ 等待</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026-03-25</td>
+                        <td>比亚迪年报发布</td>
+                        <td><span class="signal signal-yellow">⏳ 等待</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026-04-XX</td>
+                        <td>理想 Q1 财报</td>
+                        <td><span class="signal signal-yellow">⏳ 关键日期</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026-06-XX</td>
+                        <td>新 L9 销量验证</td>
+                        <td><span class="signal signal-yellow">⏳ 关键日期</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>分析人：</strong>Charlie（资产增值部经理） | <strong>审核人：</strong>金银（大管家）</p>
+            <p><strong>完成时间：</strong>2026-03-20 11:30</p>
+            <p style="margin-top: 10px; font-size: 12px;">数据来源：理想汽车 2025 年年报、乘联会、Counterpoint、国家统计局</p>
+        </div>
+    </div>
+</body>
+</html>
