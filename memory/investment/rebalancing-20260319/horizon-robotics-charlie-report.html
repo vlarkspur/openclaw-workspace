@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地平线机器人 (09660.HK) - Charlie 团队分析报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f6f7;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header .meta {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .header .status {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #52c41a;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 32px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 17px;
+            margin: 24px 0 12px 0;
+            font-weight: 600;
+        }
+        
+        .section h4 {
+            color: #1a1a1a;
+            font-size: 15px;
+            margin: 16px 0 8px 0;
+            font-weight: 600;
+        }
+        
+        .decision-box {
+            background: #fff1f0;
+            border: 1px solid #ffa39e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .decision-box.danger {
+            background: linear-gradient(135deg, #f5576c 0%, #d4145a 100%);
+            color: white;
+        }
+        
+        .decision-box.success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+        }
+        
+        .decision-box.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .decision-box table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .decision-box td {
+            padding: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .decision-box td:first-child {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: white;
+            border: 1px solid #e8eaec;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #e8eaec;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e8eaec;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+        
+        tr:hover {
+            background: #f0f0f0;
+        }
+        
+        .signal {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .signal-red {
+            background: #fff1f0;
+            color: #d4145a;
+        }
+        
+        .signal-yellow {
+            background: #fff7e6;
+            color: #d48806;
+        }
+        
+        .signal-green {
+            background: #f6ffed;
+            color: #52c41a;
+        }
+        
+        .highlight {
+            background: #fff7e6;
+            border-left: 3px solid #d48806;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .quote {
+            background: #f5f6f7;
+            border-left: 3px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+            line-height: 1.8;
+        }
+        
+        .quote p {
+            margin-bottom: 12px;
+        }
+        
+        .quote strong {
+            color: #667eea;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            background: #fafafa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            border-top: 2px solid #667eea;
+        }
+        
+        .task-assignment {
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .task-assignment h4 {
+            color: #0050b3;
+            margin-top: 0;
+        }
+        
+        .skill-framework {
+            background: #f6ffed;
+            border: 1px solid #b7eb8f;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .skill-framework h4 {
+            color: #389e0d;
+            margin-top: 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .content {
+                padding: 16px;
+            }
+            
+            table {
+                font-size: 13px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📈 地平线机器人 (09660.HK)</h1>
+            <p class="meta">
+                <strong>Charlie 团队分析报告</strong><br>
+                分析日期：2026-03-20 | 最后更新：2026-03-21 00:30<br>
+                分析师：Charlie（资产增值部经理） | 审核人：金银（大管家）
+            </p>
+            <span class="status">✅ 完整版</span>
+        </div>
+        
+        <div class="content">
+            <!-- 任务分配 -->
+            <div class="task-assignment">
+                <h4>【任务分配】</h4>
+                <ul>
+                    <li><strong>部门：</strong>资产增值部</li>
+                    <li><strong>经理：</strong>Charlie</li>
+                    <li><strong>小弟：</strong>📊 投资监控 + 🧮 估值分析 + 📈 基本面分析 + 🛡️ 风控监控 + 🧠 行为心理学 + 📰 新闻舆情 + 🌍 宏观经济</li>
+                    <li><strong>分配理由：</strong>这是股票分析任务，属于资产增值部的职责范围。需要 7 个小弟按各自思维框架并行分析，最后由 Charlie 综合审核。</li>
+                </ul>
+            </div>
+            
+            <!-- 使用的技能和思维框架 -->
+            <div class="skill-framework">
+                <h4>【使用的技能和思维框架】</h4>
+                <ul>
+                    <li><strong>skills/investment-manager-charlie/SKILL.md：</strong>Charlie 加权打分 + 反面论证 + 不确定性量化</li>
+                    <li><strong>skills/multi-search-engine/SKILL.md：</strong>17 个搜索引擎交叉验证</li>
+                    <li><strong>skills/openclaw-tavily-search/SKILL.md：</strong>结构化深度搜索</li>
+                    <li><strong>SEARCH_STRATEGY.md：</strong>多源交叉验证（至少 3 个来源）</li>
+                    <li><strong>TEAM_RULES.md：</strong>任务分配流程 + 落款格式</li>
+                </ul>
+            </div>
+            
+            <!-- 核心结论 -->
+            <div class="section">
+                <h2>一、核心结论（先说答案）</h2>
+                <div class="decision-box warning">
+                    <h3 style="color: white; margin-bottom: 15px;">🟡 持有/观望（适度减仓）</h3>
+                    <table>
+                        <tr>
+                            <td>当前仓位</td>
+                            <td>15.6%（56,400 股，市值~40.9 万 HKD）</td>
+                        </tr>
+                        <tr>
+                            <td>目标仓位</td>
+                            <td>10-12%（降至 35,000-45,000 股）</td>
+                        </tr>
+                        <tr>
+                            <td>减仓价格区间</td>
+                            <td>7.0-7.5 HKD（当前价 7.25 HKD）</td>
+                        </tr>
+                        <tr>
+                            <td>止损线</td>
+                            <td>-15%（6.2 HKD）</td>
+                        </tr>
+                        <tr>
+                            <td>持有周期</td>
+                            <td>观察 2026 年 Q2-Q3 关键催化剂</td>
+                        </tr>
+                        <tr>
+                            <td>核心逻辑</td>
+                            <td>营收高增 +57.7%，现金储备 201.88 亿（可支撑 2-3 年），酷睿程（大众）19.7% 收入稳定，客户集中度改善（71.8%→52.48%），电装成 2025 年前五大客户，欧洲总部已落地；但净亏损 104.7 亿（-546%）、研发占营收 137% 不可持续、PB 7.54 倍偏高、理想 2026 年部分替换（影响 2-3%）</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 四层过滤分析 -->
+            <div class="section">
+                <h2>二、四层过滤分析（从大到小）</h2>
+                
+                <h3>🌍 第一层：国际局势（地缘政治）</h3>
+                <table>
+                    <tr>
+                        <th>检查项</th>
+                        <th>地平线情况</th>
+                        <th>风险等级</th>
+                    </tr>
+                    <tr>
+                        <td>芯片依赖</td>
+                        <td>自研智驾芯片（征程系列），但制造依赖台积电</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>芯片成本占比</td>
+                        <td>约 15-20%（Fabless 模式）</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>地缘政治直接影响</td>
+                        <td>中美科技战，智驾芯片可能受限</td>
+                        <td><span class="signal signal-red">🔴 高</span></td>
+                    </tr>
+                    <tr>
+                        <td>关税壁垒风险</td>
+                        <td>主要市场在中国，出口占比低</td>
+                        <td><span class="signal signal-green">🟢 低</span></td>
+                    </tr>
+                    <tr>
+                        <td>供应链安全</td>
+                        <td>征程系列芯片出货量 400 万套，规模化交付</td>
+                        <td><span class="signal signal-green">🟢 低</span></td>
+                    </tr>
+                    <tr>
+                        <td>海外扩张</td>
+                        <td>欧洲总部已落地（慕尼黑），日系车企定点</td>
+                        <td><span class="signal signal-green">🟢 正面</span></td>
+                    </tr>
+                </table>
+                <p><strong>结论：</strong>地缘政治风险<strong>中等偏高</strong>，但欧洲总部落地 + 日系车企定点降低单一市场风险。</p>
+                
+                <h3>🇨🇳 第二层：国家政策（宏观周期）</h3>
+                <table>
+                    <tr>
+                        <th>检查项</th>
+                        <th>地平线情况</th>
+                        <th>风险等级</th>
+                    </tr>
+                    <tr>
+                        <td>GDP 目标 4.5-5%</td>
+                        <td>中性，汽车消费受经济影响</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>CPI 目标 2%</td>
+                        <td>通缩环境，成本压力小</td>
+                        <td><span class="signal signal-green">🟢 低</span></td>
+                    </tr>
+                    <tr>
+                        <td>PMI 49.0%（收缩）</td>
+                        <td>制造业收缩，需求承压</td>
+                        <td><span class="signal signal-red">🔴 高</span></td>
+                    </tr>
+                    <tr>
+                        <td>房地产 -11.1%</td>
+                        <td>间接影响（车企利润下滑）</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>以旧换新政策</td>
+                        <td>新能源车补贴 8-12%，直接利好</td>
+                        <td><span class="signal signal-green">🟢 利好</span></td>
+                    </tr>
+                    <tr>
+                        <td>L3 政策</td>
+                        <td>2025-12-15 已获批，2026 年商业化元年</td>
+                        <td><span class="signal signal-green">🟢 重大利好</span></td>
+                    </tr>
+                    <tr>
+                        <td>美联储降息预期</td>
+                        <td>2026 年预期降息 2-3 次，港股流动性改善</td>
+                        <td><span class="signal signal-green">🟢 利好</span></td>
+                    </tr>
+                </table>
+                <p><strong>结论：</strong>宏观环境<strong>中等偏多</strong>，L3 政策落地 + 以旧换新是重大利好。</p>
+                
+                <h3>🏭 第三层：行业分析（智驾芯片）</h3>
+                
+                <h4>行业格局（2025 年）</h4>
+                <table>
+                    <tr>
+                        <th>公司</th>
+                        <th>产品</th>
+                        <th>市场份额</th>
+                        <th>增速</th>
+                    </tr>
+                    <tr>
+                        <td>英伟达</td>
+                        <td>Orin/Xavier</td>
+                        <td>全球 70%+</td>
+                        <td><span class="signal signal-green">+50%</span></td>
+                    </tr>
+                    <tr>
+                        <td>高通</td>
+                        <td>Snapdragon Ride</td>
+                        <td>全球 15%</td>
+                        <td><span class="signal signal-green">+30%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>地平线</strong></td>
+                        <td>征程系列</td>
+                        <td>中国 30%+</td>
+                        <td><span class="signal signal-green">+39%</span></td>
+                    </tr>
+                    <tr>
+                        <td>华为</td>
+                        <td>MDC 平台</td>
+                        <td>中国 20%+</td>
+                        <td><span class="signal signal-green">+100%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mobileye</td>
+                        <td>EyeQ 系列</td>
+                        <td>全球 10%</td>
+                        <td><span class="signal signal-red">-20%</span></td>
+                    </tr>
+                </table>
+                <p><strong>地平线地位：</strong>中国智驾芯片龙头，全球第二梯队</p>
+                
+                <h4>2025 年出货量对比</h4>
+                <table>
+                    <tr>
+                        <th>公司</th>
+                        <th>出货量</th>
+                        <th>同比</th>
+                        <th>客户</th>
+                    </tr>
+                    <tr>
+                        <td>英伟达</td>
+                        <td>~500 万套</td>
+                        <td><span class="signal signal-green">+50%</span></td>
+                        <td>特斯拉/奔驰/宝马/理想</td>
+                    </tr>
+                    <tr>
+                        <td><strong>地平线</strong></td>
+                        <td><strong>400 万套</strong></td>
+                        <td><span class="signal signal-green"><strong>+39%</strong></span></td>
+                        <td><strong>比亚迪/理想/蔚来/小鹏</strong></td>
+                    </tr>
+                    <tr>
+                        <td>华为</td>
+                        <td>~300 万套</td>
+                        <td><span class="signal signal-green">+100%</span></td>
+                        <td>问界/阿维塔/极狐</td>
+                    </tr>
+                    <tr>
+                        <td>Mobileye</td>
+                        <td>~100 万套</td>
+                        <td><span class="signal signal-red">-20%</span></td>
+                        <td>传统车企</td>
+                    </tr>
+                </table>
+                
+                <h4>行业风险</h4>
+                <table>
+                    <tr>
+                        <th>风险</th>
+                        <th>影响</th>
+                        <th>地平线应对</th>
+                    </tr>
+                    <tr>
+                        <td>技术迭代</td>
+                        <td>L4 芯片要求更高算力</td>
+                        <td>征程 7 研发中（2027 年量产）</td>
+                    </tr>
+                    <tr>
+                        <td>价格战</td>
+                        <td>车企压价，毛利率承压</td>
+                        <td>软件收入占比提升至 75%</td>
+                    </tr>
+                    <tr>
+                        <td>客户集中</td>
+                        <td>前五大客户占比高</td>
+                        <td>从 71.8% 降至 52.48%</td>
+                    </tr>
+                    <tr>
+                        <td>华为竞争</td>
+                        <td>华为智驾强势崛起</td>
+                        <td>差异化竞争（开放 vs 封闭）</td>
+                    </tr>
+                    <tr>
+                        <td>英伟达下沉</td>
+                        <td>Orin 降价抢市场</td>
+                        <td>性价比优势（&lt;60 美元 vs 375 美元）</td>
+                    </tr>
+                </table>
+                <p><strong>结论：</strong>行业<strong>高成长但竞争加剧</strong>，地平线是中国龙头但面临华为/英伟达双重挤压。</p>
+                
+                <h3>🏢 第四层：公司分析（基本面 + 估值）</h3>
+                
+                <h4>财务健康（2025 年年报）</h4>
+                <table>
+                    <tr>
+                        <th>指标</th>
+                        <th>2025 年</th>
+                        <th>2024 年</th>
+                        <th>变化</th>
+                        <th>信号</th>
+                    </tr>
+                    <tr>
+                        <td>营收</td>
+                        <td>37.58 亿</td>
+                        <td>23.84 亿</td>
+                        <td><span class="signal signal-green"><strong>+57.7%</strong></span></td>
+                        <td>🟢 高增长</td>
+                    </tr>
+                    <tr>
+                        <td>毛利润</td>
+                        <td>24.3 亿</td>
+                        <td>18.42 亿</td>
+                        <td>+31.9%</td>
+                        <td>🟢 增长</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率</td>
+                        <td>64.54%</td>
+                        <td>77.25%</td>
+                        <td><span class="signal signal-red">-12.71pp</span></td>
+                        <td>🔴 下滑</td>
+                    </tr>
+                    <tr>
+                        <td>汽车业务毛利率</td>
+                        <td>67.2%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>🟢 高位</td>
+                    </tr>
+                    <tr>
+                        <td>归母净利润</td>
+                        <td><strong>-104.7 亿</strong></td>
+                        <td>+23.47 亿</td>
+                        <td><span class="signal signal-red"><strong>-546.14%</strong></span></td>
+                        <td>🔴 大幅转亏</td>
+                    </tr>
+                    <tr>
+                        <td>净利率</td>
+                        <td>-278.57%</td>
+                        <td>+98.45%</td>
+                        <td>转亏</td>
+                        <td>🔴 恶化</td>
+                    </tr>
+                    <tr>
+                        <td>ROE</td>
+                        <td><strong>-85.28%</strong></td>
+                        <td>-36.81%</td>
+                        <td><span class="signal signal-red">恶化</span></td>
+                        <td>🔴 极度恶化</td>
+                    </tr>
+                    <tr>
+                        <td>资产负债率</td>
+                        <td>58.71%</td>
+                        <td>41.53%</td>
+                        <td>+17.18pp</td>
+                        <td>🟡 上升</td>
+                    </tr>
+                    <tr>
+                        <td>现金储备</td>
+                        <td>201.88 亿</td>
+                        <td>153.71 亿</td>
+                        <td><span class="signal signal-green">+31.3%</span></td>
+                        <td>🟢 充裕</td>
+                    </tr>
+                    <tr>
+                        <td>研发开支</td>
+                        <td>51.54 亿</td>
+                        <td>31.56 亿</td>
+                        <td><span class="signal signal-green">+63.3%</span></td>
+                        <td>🟡 高投入</td>
+                    </tr>
+                    <tr>
+                        <td>经调整经营亏损</td>
+                        <td>23.72 亿</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>🟡 可控</td>
+                    </tr>
+                </table>
+                
+                <h4>收入结构转型</h4>
+                <table>
+                    <tr>
+                        <th>年份</th>
+                        <th>硬件收入</th>
+                        <th>软件收入</th>
+                        <th>状态</th>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>44.6%</td>
+                        <td>43.3%</td>
+                        <td>硬件为主</td>
+                    </tr>
+                    <tr>
+                        <td>2024</td>
+                        <td>27.9%</td>
+                        <td>69.1%</td>
+                        <td><strong>软件为主</strong></td>
+                    </tr>
+                    <tr>
+                        <td>2025</td>
+                        <td>~25%</td>
+                        <td>~75%</td>
+                        <td><strong>软件主导</strong></td>
+                    </tr>
+                </table>
+                <div class="highlight">
+                    <p><strong>洞察：</strong>软件收入占比从 43.3% 升至 75%，软件毛利率 90% vs 硬件 45%，这是整体毛利维持 64.5% 的关键。</p>
+                </div>
+                
+                <h4>客户画像（完整验证）</h4>
+                <div class="highlight">
+                    <pre style="background: #fafafa; padding: 16px; border-radius: 4px; overflow-x: auto;">
+地平线核心客户画像（2025 年）
+├── 关联方（授权/服务主力）
+│   └── 酷睿程（大众合资）✅
+│       ├── 2023 年贡献 6.27 亿（40.4%）
+│       ├── 2024H1 贡献 3.51 亿（37.6%）
+│       └── 2025H1 贡献~19.7%（占比下降）
+│
+├── 国内车企（芯片硬件出货核心）
+│   ├── 比亚迪 ✅（最大硬件客户之一，~8-12% 收入）
+│   ├── 理想 ✅（最大硬件客户之一，~5-8% 收入）
+│   ├── 吉利 ✅（2025H2 量产）
+│   ├── 长安 ✅（2025H2 量产）
+│   └── 奇瑞 ✅（2025H2 量产）
+│
+└── 国际 Tier1（海外拓展标志）
+    └── 电装（Denso）✅
+        ├── 2025 年新增前五大客户
+        ├── 算法和软件授权合作
+        └── 海外拓展标志性突破
+                    </pre>
+                </div>
+                
+                <h4>客户集中度趋势</h4>
+                <table>
+                    <tr>
+                        <th>年份</th>
+                        <th>前五大占比</th>
+                        <th>最大客户占比</th>
+                        <th>状态</th>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>60.7%</td>
+                        <td>24.7%</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>2022</td>
+                        <td>53.2%</td>
+                        <td>16.0%</td>
+                        <td><span class="signal signal-green">改善</span></td>
+                    </tr>
+                    <tr>
+                        <td>2023</td>
+                        <td>68.8%</td>
+                        <td>40.4%</td>
+                        <td><span class="signal signal-red">恶化（酷睿程放量）</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024</td>
+                        <td>71.8%</td>
+                        <td>31.5%</td>
+                        <td><span class="signal signal-green">改善</span></td>
+                    </tr>
+                    <tr>
+                        <td>2025H1</td>
+                        <td>52.48%</td>
+                        <td>19.7%</td>
+                        <td><span class="signal signal-green"><strong>大幅改善</strong></span></td>
+                    </tr>
+                </table>
+                <p><strong>洞察：</strong>客户集中度从 71.8% 降至 52.48%，风险降低。</p>
+                
+                <h4>理想自研芯片影响（修正后）</h4>
+                <table>
+                    <tr>
+                        <th>车型</th>
+                        <th>当前芯片</th>
+                        <th>替换时间</th>
+                        <th>地平线收入影响</th>
+                    </tr>
+                    <tr>
+                        <td>理想 L9（新款）</td>
+                        <td>征程 6M</td>
+                        <td>2026 年 4 月</td>
+                        <td>~2-3% 收入</td>
+                    </tr>
+                    <tr>
+                        <td>理想 L8/L7</td>
+                        <td>征程 5</td>
+                        <td>2027-2028 年</td>
+                        <td>2026 年无影响</td>
+                    </tr>
+                    <tr>
+                        <td>理想 i9（纯电）</td>
+                        <td>-</td>
+                        <td>2026 年下半年</td>
+                        <td>无影响（本来就不用）</td>
+                    </tr>
+                </table>
+                <div class="highlight">
+                    <p><strong>2026 年实际影响：</strong>失去 L9 订单约 2-3% 收入，不是之前估算的 10%！</p>
+                </div>
+                
+                <h4>估值分析</h4>
+                <table>
+                    <tr>
+                        <th>指标</th>
+                        <th>地平线</th>
+                        <th>行业平均</th>
+                        <th>信号</th>
+                    </tr>
+                    <tr>
+                        <td>PE-TTM</td>
+                        <td>亏损</td>
+                        <td>~35 倍</td>
+                        <td><span class="signal signal-red">🔴 不适用</span></td>
+                    </tr>
+                    <tr>
+                        <td>PB</td>
+                        <td>7.54 倍</td>
+                        <td>~5 倍</td>
+                        <td><span class="signal signal-red">🔴 高估</span></td>
+                    </tr>
+                    <tr>
+                        <td>PS</td>
+                        <td>~15 倍</td>
+                        <td>~8 倍</td>
+                        <td><span class="signal signal-red">🔴 高估</span></td>
+                    </tr>
+                    <tr>
+                        <td>研发/营收</td>
+                        <td>137%</td>
+                        <td>~20%</td>
+                        <td><span class="signal signal-red">🔴 不可持续</span></td>
+                    </tr>
+                </table>
+                
+                <h4>机构目标价</h4>
+                <table>
+                    <tr>
+                        <th>机构</th>
+                        <th>评级</th>
+                        <th>目标价</th>
+                        <th>较当前空间</th>
+                        <th>日期</th>
+                    </tr>
+                    <tr>
+                        <td><strong>高盛</strong></td>
+                        <td>买入</td>
+                        <td><strong>15.3 HKD</strong></td>
+                        <td><span class="signal signal-green">+111%</span></td>
+                        <td>2026-03</td>
+                    </tr>
+                    <tr>
+                        <td><strong>摩根大通</strong></td>
+                        <td>增持</td>
+                        <td><strong>13 HKD</strong></td>
+                        <td><span class="signal signal-green">+79%</span></td>
+                        <td>2025-11</td>
+                    </tr>
+                    <tr>
+                        <td><strong>中信里昂</strong></td>
+                        <td>跑赢大市</td>
+                        <td><strong>11 HKD</strong></td>
+                        <td><span class="signal signal-green">+52%</span></td>
+                        <td>2025-08</td>
+                    </tr>
+                </table>
+                <p><strong>一致性预期：</strong>目标价 11-15.3 HKD，平均约 13 HKD（+79%）</p>
+            </div>
+            
+            <!-- 反面论证 -->
+            <div class="section">
+                <h2>三、反面论证（必须回答）</h2>
+                
+                <h4>8 个反面问题</h4>
+                <table>
+                    <tr>
+                        <th>反面问题</th>
+                        <th>回答</th>
+                        <th>可信度</th>
+                    </tr>
+                    <tr>
+                        <td>如果 2026 年营收增速降至 20%，公司能活吗？</td>
+                        <td>能，现金储备 201.88 亿，可支撑 2-3 年</td>
+                        <td><span class="signal signal-green">🟢 高</span></td>
+                    </tr>
+                    <tr>
+                        <td>如果毛利率继续下滑至 50%，盈利能转正吗？</td>
+                        <td>难，软件毛利 90% 是关键支撑</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>如果华为智驾市场份额超越地平线，竞争力还在吗？</td>
+                        <td>仍在，但估值会下调 30-50%</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>如果研发开支 51 亿打水漂，股东能承受吗？</td>
+                        <td>短期能，但股价可能 -50%</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>如果中美科技战升级，地平线被制裁，能活吗？</td>
+                        <td>困难，制造依赖台积电</td>
+                        <td><span class="signal signal-red">🔴 高</span></td>
+                    </tr>
+                    <tr>
+                        <td>如果 L3 政策推进缓慢，智驾需求放缓，影响多大？</td>
+                        <td>营收增速可能降至 20-30%</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>和英伟达 2019 年对比，地平线胜算几何？</td>
+                        <td>英伟达有 CUDA 生态优势，地平线有中国市场优势，胜算 40-50%</td>
+                        <td><span class="signal signal-yellow">🟡 中</span></td>
+                    </tr>
+                    <tr>
+                        <td>如果 PB 从 7.5 倍跌至 4 倍（-47%），逻辑还成立吗？</td>
+                        <td>不成立，4 倍 PB 对应 0 增长预期</td>
+                        <td><span class="signal signal-red">🔴 高</span></td>
+                    </tr>
+                </table>
+                
+                <h4>认知偏差检查</h4>
+                <table>
+                    <tr>
+                        <th>偏差</th>
+                        <th>是否存在</th>
+                        <th>证据</th>
+                    </tr>
+                    <tr>
+                        <td>喜欢/热爱倾向</td>
+                        <td>⚠️ 警惕</td>
+                        <td>可能喜欢科技股/国产替代概念</td>
+                    </tr>
+                    <tr>
+                        <td>避免不一致性倾向</td>
+                        <td>✅ 已纠正</td>
+                        <td>最初高估理想替换影响，已修正</td>
+                    </tr>
+                    <tr>
+                        <td>社会认同倾向</td>
+                        <td>⚠️ 警惕</td>
+                        <td>"中国英伟达"概念火热</td>
+                    </tr>
+                    <tr>
+                        <td>稀缺性错误倾向</td>
+                        <td>⚠️ 警惕</td>
+                        <td>智驾芯片龙头稀缺性</td>
+                    </tr>
+                    <tr>
+                        <td>权威错误倾向</td>
+                        <td>❌ 无</td>
+                        <td>未引用"专家说"</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- 风控建议 -->
+            <div class="section">
+                <h2>四、风控建议</h2>
+                
+                <h4>仓位建议</h4>
+                <table>
+                    <tr>
+                        <td>当前仓位</td>
+                        <td>15.6%（56,400 股，市值~40.9 万 HKD）</td>
+                    </tr>
+                    <tr>
+                        <td>目标仓位</td>
+                        <td>10-12%（降至 35,000-45,000 股）</td>
+                    </tr>
+                    <tr>
+                        <td>减仓幅度</td>
+                        <td>11,400-21,400 股（20-38% 仓位）</td>
+                    </tr>
+                    <tr>
+                        <td>减仓价格区间</td>
+                        <td>7.0-7.5 HKD（当前价 7.25 HKD）</td>
+                    </tr>
+                    <tr>
+                        <td>分批策略</td>
+                        <td>3 批（7.0、7.25、7.5 HKD 各 1/3）</td>
+                    </tr>
+                </table>
+                
+                <h4>止损线</h4>
+                <table>
+                    <tr>
+                        <th>类型</th>
+                        <th>价格</th>
+                        <th>触发条件</th>
+                    </tr>
+                    <tr>
+                        <td>硬止损</td>
+                        <td>6.2 HKD（-15%）</td>
+                        <td>基本面恶化（2026 Q1 营收 -20%）</td>
+                    </tr>
+                    <tr>
+                        <td>软止损</td>
+                        <td>6.5 HKD（-10%）</td>
+                        <td>重新评估逻辑</td>
+                    </tr>
+                    <tr>
+                        <td>动态止损</td>
+                        <td>移动止损 15%</td>
+                        <td>股价上涨后跟随上移</td>
+                    </tr>
+                </table>
+                
+                <h4>风险因素</h4>
+                <table>
+                    <tr>
+                        <th>风险</th>
+                        <th>概率</th>
+                        <th>影响</th>
+                        <th>应对</th>
+                    </tr>
+                    <tr>
+                        <td>2026 年营收增速 -50%</td>
+                        <td>中</td>
+                        <td>估值 -40%</td>
+                        <td>减仓至 8%</td>
+                    </tr>
+                    <tr>
+                        <td>理想 L9 替换超预期</td>
+                        <td>中</td>
+                        <td>收入 -2-3%</td>
+                        <td>观察 2026 Q2 销量</td>
+                    </tr>
+                    <tr>
+                        <td>比亚迪自研跟进</td>
+                        <td>低</td>
+                        <td>2027 年影响 3-5%</td>
+                        <td>跟踪弗迪科技进展</td>
+                    </tr>
+                    <tr>
+                        <td>中美科技战升级</td>
+                        <td>中</td>
+                        <td>供应链中断</td>
+                        <td>减仓至 5%</td>
+                    </tr>
+                    <tr>
+                        <td>L3 政策推进缓慢</td>
+                        <td>低</td>
+                        <td>需求放缓</td>
+                        <td>减仓至 8%</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- 催化剂/观察点 -->
+            <div class="section">
+                <h2>五、催化剂/观察点</h2>
+                
+                <h4>2026 年关键催化剂</h4>
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>事件</th>
+                        <th>预期影响</th>
+                    </tr>
+                    <tr>
+                        <td>2026 Q2</td>
+                        <td>理想 L9 新款量产（自研芯片）</td>
+                        <td><span class="signal signal-red">🔴 负面（验证替换进度）</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026 Q2</td>
+                        <td>酷睿程（大众）首款车型量产</td>
+                        <td><span class="signal signal-green">🟢 利好（验证压舱石稳定性）</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026 Q2</td>
+                        <td>L3 政策全国推广</td>
+                        <td><span class="signal signal-green">🟢 利好（智驾渗透率提升）</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026 Q3</td>
+                        <td>征程 7 发布</td>
+                        <td><span class="signal signal-green">🟢 利好（技术竞争力验证）</span></td>
+                    </tr>
+                    <tr>
+                        <td>2026 Q4</td>
+                        <td>2026 年全年定点车型数量</td>
+                        <td><span class="signal signal-green">🟢 利好（验证客户多元化）</span></td>
+                    </tr>
+                </table>
+                
+                <h4>关键观察点</h4>
+                <table>
+                    <tr>
+                        <th>指标</th>
+                        <th>当前值</th>
+                        <th>警戒线</th>
+                        <th>观察频率</th>
+                    </tr>
+                    <tr>
+                        <td>季度营收</td>
+                        <td>~9.4 亿/季</td>
+                        <td>&lt;7 亿/季</td>
+                        <td>季度</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率</td>
+                        <td>64.54%</td>
+                        <td>&lt;55%</td>
+                        <td>季度</td>
+                    </tr>
+                    <tr>
+                        <td>研发费用率</td>
+                        <td>137%</td>
+                        <td>&lt;100%</td>
+                        <td>季度</td>
+                    </tr>
+                    <tr>
+                        <td>芯片出货量</td>
+                        <td>400 万套/年</td>
+                        <td>&lt;300 万套/年</td>
+                        <td>年度</td>
+                    </tr>
+                    <tr>
+                        <td>客户集中度</td>
+                        <td>52.48%</td>
+                        <td>&gt;60%</td>
+                        <td>年度</td>
+                    </tr>
+                    <tr>
+                        <td>酷睿程收入占比</td>
+                        <td>~19.7%</td>
+                        <td>&lt;15%</td>
+                        <td>年度</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Charlie 综合建议 -->
+            <div class="section">
+                <h2>六、Charlie 综合建议</h2>
+                
+                <h4>决策：🟡 持有/观望（适度减仓）</h4>
+                
+                <p><strong>理由：</strong></p>
+                
+                <p><strong>正面因素：</strong></p>
+                <ol>
+                    <li>营收高增 +57.7%，现金储备 201.88 亿（可支撑 2-3 年）</li>
+                    <li>酷睿程（大众）19.7% 收入稳定，合资绑定长期</li>
+                    <li>客户集中度改善（71.8%→52.48%），电装成 2025 年前五大</li>
+                    <li>L3 政策已落地，2026 年是商业化元年</li>
+                    <li>软件收入占比 75%，毛利 90%，支撑整体毛利 64.5%</li>
+                    <li>欧洲总部已落地（慕尼黑），海外扩张加速</li>
+                </ol>
+                
+                <p><strong>负面因素：</strong></p>
+                <ol>
+                    <li>净亏损 104.7 亿（-546%），研发占营收 137% 不可持续</li>
+                    <li>PB 7.54 倍偏高，透支未来 3-5 年增长</li>
+                    <li>理想 2026 年部分替换（影响 2-3% 收入）</li>
+                    <li>比亚迪 2027-2028 年可能跟进自研（影响 3-5%）</li>
+                    <li>地缘政治风险中等偏高（制造依赖台积电）</li>
+                </ol>
+                
+                <div class="highlight">
+                    <p><strong>Charlie 的独立判断：</strong></p>
+                    <ul>
+                        <li>地平线是<strong>高成长、高投入、高亏损</strong>的"三高"科技公司</li>
+                        <li>营收 +57.7% 证明业务竞争力，但 104 亿亏损不可持续</li>
+                        <li>关键看 2026 年能否：①酷睿程量产顺利 ②新增定点车型超预期 ③研发费用率降至 100% 以下</li>
+                        <li>如果 2026 年无法改善，估值可能从 7.5 倍 PB 跌至 4 倍（-47%）</li>
+                        <li><strong>风险收益不对称</strong>：上行空间 79%（机构目标价 13 HKD），下行风险 47%（PB 跌至 4 倍）</li>
+                    </ul>
+                </div>
+                
+                <p><strong>但不清仓的理由：</strong></p>
+                <ol>
+                    <li>酷睿程（大众）19.7% 收入稳定，合资绑定</li>
+                    <li>客户集中度持续改善（71.8%→52.48%）</li>
+                    <li>电装（Denso）成 2025 年前五大，海外拓展突破</li>
+                    <li>L3 政策落地，2026 年是智驾商业化元年</li>
+                    <li>软件收入占比 75%，毛利 90%，商业模式优化</li>
+                </ol>
+                
+                <p><strong>减仓策略：</strong></p>
+                <ul>
+                    <li>当前价 7.25 HKD，减仓 20-38% 仓位</li>
+                    <li>目标仓位 10-12%（35,000-45,000 股）</li>
+                    <li>保留观察仓，等待 2026 年 Q2-Q3 催化剂验证</li>
+                </ul>
+            </div>
+            
+            <!-- Charlie 寄语 -->
+            <div class="section">
+                <div class="quote">
+                    <p><strong>💡 Charlie 寄语：</strong></p>
+                    <p>"小溪，地平线这个投资不容易——</p>
+                    <p><strong>高增长</strong>：营收 +57.7%，芯片出货 400 万套<br>
+                    <strong>高投入</strong>：研发 51.54 亿，占营收 137%<br>
+                    <strong>高亏损</strong>：净亏损 104.7 亿，ROE -85.28%</p>
+                    <p>这是典型的'烧钱换未来'故事。</p>
+                    <p>关键问题是：你相不相信智驾是未来？<br>
+                    相不相信地平线能活到最后？</p>
+                    <p>如果答案是 YES，那现在可以保留 10-12% 观察仓。<br>
+                    如果答案是 NO，那就减仓到 5% 以下。</p>
+                    <p>投资科技公司，不是看现在赚多少钱，<br>
+                    是看 5-10 年后能赚多少钱。</p>
+                    <p>但前提是：<strong>它能活到 5-10 年后。</strong></p>
+                    <p>地平线有中国市场的优势，有规模化交付的能力，有大众/电装的绑定。<br>
+                    但它也面临华为/英伟达的双重挤压，面临价格战的压力，面临客户自研的风险。</p>
+                    <p><strong>减仓不是否定地平线，是管理不确定性。</strong></p>
+                    <p>保留 10-12% 观察仓，给 2026 年一个验证机会。</p>
+                    <p>如果酷睿程量产顺利、新增定点超预期、研发费用率下降，你可以加仓。<br>
+                    如果继续烧钱但无成果，你已提前减仓。</p>
+                    <p><strong>这就是风控——不是赌对错，是管理不确定性。</strong>"</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>数据来源：</strong>地平线机器人 2025 年年报（2026-03-19 发布）、乘联会/公司公告、Counterpoint/高工智能汽车、国家统计局/政府工作报告、高盛/摩根大通/中信里昂研报</p>
+            <p style="margin-top: 10px;"><strong>分析人：</strong>Charlie（资产增值部经理） | <strong>审核人：</strong>金银（大管家） | <strong>完成时间：</strong>2026-03-21 00:30</p>
+            <p style="margin-top: 10px;"><strong>文件位置：</strong>memory/investment/rebalancing-20260319/horizon-robotics-charlie-report.html</p>
+        </div>
+    </div>
+</body>
+</html>
